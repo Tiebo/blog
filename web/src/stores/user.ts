@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
 import {useApiStore} from "@/stores/api";
+import {qq_imgUrl} from "@/api/other";
 
 export const useUserStore = defineStore('user', {
     state: () => {
@@ -15,22 +16,30 @@ export const useUserStore = defineStore('user', {
             mobile_photo: "",
             status: "",
             pulling_info: false,
+            qqAccount: "",
+            qqPhoto: "",
+            qqName: "",
         }
     },
     actions: {
-        updateInfo(): void {
-            useApiStore().apiUser.getUserInfo({token: this.token})
-                .then(resp => {
-                    const data = resp.data.data;
-                    this.id = data.uid;
-                    this.username = data.username;
-                    this.photo = data.photo;
+        async updateInfo() {
+            await useApiStore().apiUser.getUserInfo({token: this.token})
+                .then(respData => {
+                    const data = respData.data;
+                    this.id = data.user.uid;
+                    this.username = data.user.username;
+                    this.photo = data.user.photo;
                     this.is_login = true;
-                    this.is_admin = data.admin;
-                    this.email = data.email;
-                    this.description = data.description;
-                    this.mobile_photo = data.mobilePhoneNumber;
-                    this.status = data.status;
+                    this.is_admin = data.user.admin;
+                    this.email = data.user.email;
+                    this.description = data.user.description;
+                    this.mobile_photo = data.user.mobilePhoneNumber;
+                    this.status = data.user.status;
+                    this.qqAccount = data.user.qqAccount;
+                    qq_imgUrl(this.qqAccount).then(data => {
+                        this.qqPhoto = data.imgurl;
+                        this.qqName = data.name;
+                    });
                     this.pulling_info = true;
                 })
                 .catch(resp => {
@@ -49,6 +58,8 @@ export const useUserStore = defineStore('user', {
                 email: "",
                 mobile_photo: "",
                 status: "",
+                pulling_info: false,
+                qqAccount: "",
             })
             localStorage.removeItem("token");
         }

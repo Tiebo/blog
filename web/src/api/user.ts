@@ -9,7 +9,7 @@ import request from "./request"
  * @param data
  */
 export function register(data: object) {
-    return request.post("/user/account/register/", data);
+    return request.post("/user/account/register/", data).then(resp => resp.data);
 }
 
 /**
@@ -20,7 +20,7 @@ export function register(data: object) {
  * @param data
  */
 export function login(data: object) {
-    return request.post("/user/account/token/", data);
+    return request.post("/user/account/token/", data).then(resp => resp.data);
 }
 
 /**
@@ -30,5 +30,5 @@ export function login(data: object) {
  * @param data
  */
 export function getUserInfo(data: object) {
-    return request.get("/user/account/info/", data);
+    return request.get("/user/account/info/", data).then(resp => resp.data);
 }

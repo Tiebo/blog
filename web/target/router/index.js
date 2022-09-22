@@ -2,9 +2,11 @@ import TagsViewVue from '@/views/TagsView.vue';
 import UserLoginView from '@/views/UserLoginView.vue';
 import { createRouter, createWebHistory } from 'vue-router';
 import homeView from '../views/HomeView.vue';
-import NotFound from '../components/NotFound.vue';
+import NotFound from '../views/NotFound.vue';
 import CategoriesView from '@/views/CategoriesView.vue';
 import { useUserStore } from "@/stores/user";
+import ArticlesView from '@/views/ArticlesView.vue';
+import ArticleBodyView from '@/views/ArticleBodyView.vue';
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
     routes: [
@@ -14,15 +16,17 @@ const router = createRouter({
             component: homeView,
         },
         {
-            path: '/archives',
-            name: 'archives_index',
-            component: homeView,
-            meta: {
-                requestAuth: true,
-            }
+            path: '/articles/',
+            name: 'article_index',
+            component: ArticlesView,
         },
         {
-            path: '/tags',
+            path: '/articles/:article_id/',
+            name: 'archives_index',
+            component: ArticleBodyView,
+        },
+        {
+            path: '/tags/',
             name: 'tags_index',
             component: TagsViewVue,
             meta: {
@@ -30,7 +34,7 @@ const router = createRouter({
             }
         },
         {
-            path: '/categories',
+            path: '/categories/',
             name: 'categories_index',
             component: CategoriesView,
             meta: {
@@ -38,7 +42,7 @@ const router = createRouter({
             }
         },
         {
-            path: '/login',
+            path: '/login/',
             name: 'login_index',
             component: UserLoginView,
         },

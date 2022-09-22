@@ -7,7 +7,7 @@ import { useUserStore } from "@/stores/user";
  * @param data
  */
 export function getArticlesList(data) {
-    return request.post("/articles/info/getlist/", data);
+    return request.post("/articles/info/getlist/", data).then(resp => resp.data);
 }
 /**
  * @data {
@@ -16,15 +16,16 @@ export function getArticlesList(data) {
  * @param data
  */
 export function getTagsByArticle(data) {
-    return request.post("/articles/info/arctags/", data);
+    return request.post("/articles/info/arctags/", data).then(resp => resp.data);
 }
 export function orArticleByHot() {
-    return request.get("/articles/info/hottest/", {
-        token: useUserStore().token,
-    });
+    return request.get("/articles/info/hottest/", {}).then(resp => resp.data);
 }
 export function orArticleByCreateDate() {
-    return request.get("/articles/info/newest/", {
-        token: useUserStore().token,
-    });
+    return request.get("/articles/info/newest/", {}).then(resp => resp.data);
+}
+export function getArticleBody(data) {
+    return request.get("/articles/info/body/", {
+        body_id: 1,
+    }).then(resp => resp.data);
 }

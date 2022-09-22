@@ -58,6 +58,7 @@ public class RegisterImpl implements RegisterService {
         User user = new User(
                 null,
                 username,
+                null,
                 encodePwd,
                 false,
                 photo,

@@ -7,11 +7,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-public class Tag {
+@NoArgsConstructor
+public class ArticleBody {
     @TableId(type = IdType.AUTO)
     private Integer id;
-    private String tagName;
-    private Integer tagViewCounts;
+    private String articleBody;
 }

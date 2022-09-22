@@ -8,7 +8,7 @@ import request from "./request";
  * @param data
  */
 export function register(data) {
-    return request.post("/user/account/register/", data);
+    return request.post("/user/account/register/", data).then(resp => resp.data);
 }
 /**
  * @data {
@@ -18,7 +18,7 @@ export function register(data) {
  * @param data
  */
 export function login(data) {
-    return request.post("/user/account/token/", data);
+    return request.post("/user/account/token/", data).then(resp => resp.data);
 }
 /**
  * @data {
@@ -27,5 +27,5 @@ export function login(data) {
  * @param data
  */
 export function getUserInfo(data) {
-    return request.get("/user/account/info/", data);
+    return request.get("/user/account/info/", data).then(resp => resp.data);
 }

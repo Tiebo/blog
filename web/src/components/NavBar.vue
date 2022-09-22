@@ -22,9 +22,9 @@
               </router-link>
             </li>
             <li>
-              <router-link class="link" :to="{name: 'archives_index'}">
+              <router-link class="link" :to="{name: 'article_index'}">
                 <i class="bi bi-archive-fill"></i>
-                Archives
+                articles
               </router-link>
             </li>
             <li>

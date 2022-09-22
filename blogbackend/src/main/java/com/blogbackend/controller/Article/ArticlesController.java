@@ -16,8 +16,6 @@ public class ArticlesController {
 
     @PostMapping("/articles/info/getlist/")
     public Result getArticles(@RequestParam Map<String, String> data) {
-        System.out.println(data);
-        System.out.println(data.values());
         int page = Integer.parseInt(data.get("page"));
         int pageSize = Integer.parseInt(data.get("pageSize"));
         return getArticlesService.getArticles(page, pageSize);

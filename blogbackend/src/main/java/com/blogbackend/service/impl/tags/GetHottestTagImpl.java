@@ -21,7 +21,7 @@ public class GetHottestTagImpl implements GetHottestTagService {
     public Result getHottestTag() {
 
         QueryWrapper<Tag> qw = new QueryWrapper<>();
-        qw.orderBy(true, false, "tag_hot");
+        qw.orderBy(true, false, "tag_view_counts");
         List<Tag> tags = tagMapper.selectList(qw);
         JSONObject res = new JSONObject();
         res.put("data", tags);

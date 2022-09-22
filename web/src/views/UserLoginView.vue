@@ -85,9 +85,9 @@ const GetLogin = (): void => {
   $api.apiUser.login({
     username: username.value,
     password: password.value
-  }).then(resp => {
-    if (resp.data.msg === "success") {
-      userStore.token = resp.data.data.token;
+  }).then(data => {
+    if (data.msg === "success") {
+      userStore.token = data.data.token;
       localStorage.setItem("token", userStore.token);
       userStore.updateInfo();
       router.push({name: "home_index"});
@@ -101,9 +101,9 @@ const GetRegister = (): void => {
     username: username.value,
     password: password.value,
     confirm_password: confirm_password.value
-  }).then(resp => {
-    if (resp.data.data.error_message !== "success")
-      error_message.value = resp.data.data.error_message;
+  }).then(data => {
+    if (data.data.error_message !== "success")
+      error_message.value = data.data.error_message;
     else {
       username.value = "";
       password.value = "";

@@ -21,7 +21,7 @@ public class Article {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Shanghai")
     private Date modifyDate;
     // 简介
-    private String summary;
+    private String description;
     private String title;
     private Integer viewCounts;
     // 是否置顶

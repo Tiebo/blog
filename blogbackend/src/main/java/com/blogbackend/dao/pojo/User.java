@@ -16,6 +16,7 @@ public class User {
     @TableId(type = IdType.AUTO)
     private Integer uid;
     private String username;
+    private String qqAccount;
     private String password;
     private boolean isAdmin;
     private String photo;
