@@ -1,0 +1,22 @@
+/* 全局样式css */
+body {
+    background: url("../img/v2-a261bb8501e6a667100269198a95a935_r.jpg") no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    overflow-y: scroll;
+}
+
+*::-webkit-scrollbar {
+    width: 15px;
+}
+
+*::-webkit-scrollbar-thumb {
+    background: #77a1c8;
+    border-radius: 10px;
+}
+
+*::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background-color: #d6e1eb
+}
