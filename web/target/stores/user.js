@@ -1,6 +1,5 @@
-import { defineStore } from 'pinia';
 import { useApiStore } from "@/stores/api";
-import { qq_imgUrl } from "@/api/other";
+import { defineStore } from 'pinia';
 export const useUserStore = defineStore('user', {
     state: () => {
         return {
@@ -35,10 +34,6 @@ export const useUserStore = defineStore('user', {
                 this.mobile_photo = data.user.mobilePhoneNumber;
                 this.status = data.user.status;
                 this.qqAccount = data.user.qqAccount;
-                qq_imgUrl(this.qqAccount).then(data => {
-                    this.qqPhoto = data.imgurl;
-                    this.qqName = data.name;
-                });
                 this.pulling_info = true;
             })
                 .catch(resp => {

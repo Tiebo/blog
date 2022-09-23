@@ -1,6 +1,5 @@
+import { useApiStore } from "@/stores/api";
 import { defineStore } from 'pinia'
-import {useApiStore} from "@/stores/api";
-import {qq_imgUrl} from "@/api/other";
 
 export const useUserStore = defineStore('user', {
     state: () => {
@@ -23,7 +22,7 @@ export const useUserStore = defineStore('user', {
     },
     actions: {
         async updateInfo() {
-            await useApiStore().apiUser.getUserInfo({token: this.token})
+            await useApiStore().apiUser.getUserInfo({ token: this.token })
                 .then(respData => {
                     const data = respData.data;
                     this.id = data.user.uid;
@@ -36,13 +35,8 @@ export const useUserStore = defineStore('user', {
                     this.mobile_photo = data.user.mobilePhoneNumber;
                     this.status = data.user.status;
                     this.qqAccount = data.user.qqAccount;
-                    qq_imgUrl(this.qqAccount).then(data => {
-                        this.qqPhoto = data.imgurl;
-                        this.qqName = data.name;
-                    });
                     this.pulling_info = true;
-                })
-                .catch(resp => {
+                }).catch(resp => {
                     this.pulling_info = false;
                 })
         },

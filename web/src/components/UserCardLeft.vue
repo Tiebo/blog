@@ -21,9 +21,9 @@
   </div>
   <div class="card">
     <div class="card-body">
-        <span class="label-link">
-          <i class="bi bi-arrow-right-square"/>&nbsp;快速访问
-        </span>
+      <span class="label-link">
+        <i class="bi bi-arrow-right-square" />&nbsp;快速访问
+      </span>
     </div>
     <div class="card-body" style="padding-top: 0">
       <div class="row">
@@ -40,9 +40,10 @@
   </div>
   <div class="card">
     <div class="card-body">
-        <span class="label-link">
-          <i class="bi bi-archive-fill"/>&nbsp;文章分类
-        </span>
+      <span class="label-link">
+        <i class="bi bi-archive-fill" />&nbsp;
+        文章分类
+      </span>
     </div>
     <div class="card-body" style="padding-top: 0">
       <div v-for="tag of tags" @click="router_to_categories(tag.id)" :key="tag.id" class="row classification">
@@ -58,23 +59,30 @@
 </template>
 
 <script setup lang="ts">
-import {ref} from 'vue';
-import {useApiStore} from "@/stores/api";
-import {useUserStore} from "@/stores/user";
+import { qq_imgUrl } from "@/api/other";
+import { useApiStore } from "@/stores/api";
+import { useUserStore } from "@/stores/user";
+import { ref } from 'vue';
 
 const $api = useApiStore();
 const userStore = useUserStore();
 
 let qq_photo = ref('');
 let qq_name = ref('');
+let tags: any = ref([]);
 
 async function get_qq_info() {
+  await userStore.updateInfo();
+
   if (userStore.is_login) {
-    if (userStore.qqAccount) {
+    if (userStore.qqPhoto && userStore.qqName) {
       qq_photo.value = userStore.qqPhoto;
       qq_name.value = userStore.qqName;
     } else {
-      await userStore.updateInfo();
+      await qq_imgUrl(userStore.qqAccount).then(data => {
+        userStore.qqPhoto = data.imgurl;
+        userStore.qqName = data.name;
+      });
       qq_photo.value = userStore.qqPhoto;
       qq_name.value = userStore.qqName;
     }
@@ -85,7 +93,6 @@ async function get_qq_info() {
 }
 get_qq_info();
 
-let tags = ref([]);
 $api.apiTags.getHottestTag({}).then(data => {
   tags.value = data.data;
 })
@@ -96,21 +103,19 @@ const router_to_categories = (id: string) => {
 </script>
 
 <style scoped>
-
-.classification:hover, .classification > div:hover {
-  background-color: #d9d5d5;
-  transition: 300ms;
-  color: #4cb2bb;
+.classification:hover,
+.classification>* :hover {
+  background-color: #a19f9f;
+  color: #eabf51;
   cursor: pointer;
 }
 
-.classification > div > a {
-  color: #212529;
-  transition: 300ms;
+.classification>div>a {
+  background-color: #a19f9f;
   text-decoration: none;
 }
 
-.classification {
+.classification>* {
   transition: 300ms;
 }
 

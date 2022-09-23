@@ -2,10 +2,10 @@
   <div class="container">
     <div class="row">
       <div class="col-3">
-        <UserCardLeft/>
+        <UserCardLeft />
       </div>
       <div class="col-9">
-        <ArticlePost/>
+        <ArticlePost />
       </div>
     </div>
   </div>

@@ -4,7 +4,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import homeView from '../views/HomeView.vue';
 import NotFound from '../views/NotFound.vue'
 import CategoriesView from '@/views/CategoriesView.vue'
-import {useUserStore} from "@/stores/user";
+import { useUserStore } from "@/stores/user";
 import ArticlesView from '@/views/ArticlesView.vue'
 import ArticleBodyView from '@/views/ArticleBodyView.vue'
 
@@ -23,8 +23,9 @@ const router = createRouter({
         },
         {
             path: '/articles/:article_id/',
-            name: 'archives_index',
+            name: 'articles_body_index',
             component: ArticleBodyView,
+
         },
         {
             path: '/tags/',

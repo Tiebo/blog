@@ -1,14 +1,19 @@
 <template>
-    <el-card class="box-card">
-        <slot></slot>
-    </el-card>
-</template>
-  
-<script setup lang = 'ts'>
+  <div>
 
+  </div>
+</template>
+
+<script lang="ts">
+export default {
+  name: "ContentBase",
+  components: {},
+  setup() {
+
+  }
+}
 </script>
-  
+
 <style scoped>
 
 </style>
-  

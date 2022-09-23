@@ -1,0 +1,15 @@
+// 这里贴出我的jsconfig配置，和上面的插件配置对应
+{
+	"compilerOptions": {
+		"target": "esnext",
+		"module": "commonjs",
+		"allowSyntheticDefaultImports": true,
+		"baseUrl": "./",
+		"paths": {
+			"@/*": ["src/*"],
+			"@css*": ["src/assets/css*"],
+			"@icon*": ["src/assets/icon/*"],
+			"@image*": ["src/assets/image/*"]
+		}
+	}
+}

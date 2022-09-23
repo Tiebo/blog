@@ -5,8 +5,13 @@
         <a class="navbar-brand" href="#">
           <ul>
             <li class="title">
-              <router-link class="link" :to="{name: 'home_index'}">
+              <router-link v-show="!useUserStore().is_login" class="link" :to="{name: 'home_index'}">
                 MyBlog
+              </router-link>
+              <router-link v-show="useUserStore().is_login" class="logo link" :to="{name: 'home_index'}">
+                <img :src="useUserStore().qqPhoto" alt="">
+                &nbsp;
+                <span>{{ useUserStore().qqName }}</span>
               </router-link>
             </li>
           </ul>
@@ -66,18 +71,27 @@
 </template>
     
 <script setup lang="ts">
-import {useUserStore} from "@/stores/user";
+import { useUserStore } from "@/stores/user";
 import router from "@/router";
 
 const userStore = useUserStore();
 if (localStorage.getItem("token")) {
   userStore.token = localStorage.getItem("token") as string;
   userStore.updateInfo();
-  router.push({name: "home_index"});
 }
 </script>
     
 <style scoped>
+.logo>img {
+  width: 6vh;
+  border-radius: 50%;
+}
+
+.logo>span {
+  font-size: 24px;
+  color: rgb(193, 191, 191);
+}
+
 * {
   box-sizing: border-box;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif

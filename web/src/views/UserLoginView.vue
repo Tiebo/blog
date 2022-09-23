@@ -9,9 +9,9 @@
           <a href="#"> <i class="bi bi-google"></i> </a>
         </div>
         <span>or use your email for registration</span>
-        <input v-model="username" type="text" placeholder="Name"/>
-        <input v-model="password" type="password" placeholder="password"/>
-        <input v-model="confirm_password" type="password" placeholder="confirm password"/>
+        <input v-model="username" type="text" placeholder="Name" />
+        <input v-model="password" type="password" placeholder="password" />
+        <input v-model="confirm_password" type="password" placeholder="confirm password" />
         <span>{{ error_message }}</span>
         <button type="submit">Sign Up</button>
       </form>
@@ -27,8 +27,8 @@
         </div>
 
         <span>or use your Email</span>
-        <input v-model="username" type="text" placeholder="Username"/>
-        <input v-model="password" type="password" placeholder="Password"/>
+        <input v-model="username" type="text" placeholder="Username" />
+        <input v-model="password" type="password" placeholder="Password" />
         <a href="/">Forgot your password?</a>
 
         <button type="submit">Sign In</button>
@@ -51,14 +51,16 @@
       </div>
     </div>
   </div>
+
 </template>
 
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted} from 'vue';
+import { type Ref } from 'vue';
+import router from "@/router";
 import { useApiStore } from "@/stores/api";
 import { useUserStore } from "@/stores/user";
-import router from "@/router";
+import { onMounted, onUnmounted, ref } from 'vue';
 
 
 const $api = useApiStore();
@@ -90,7 +92,7 @@ const GetLogin = (): void => {
       userStore.token = data.data.token;
       localStorage.setItem("token", userStore.token);
       userStore.updateInfo();
-      router.push({name: "home_index"});
+      router.push({ name: "home_index" });
     }
   })
 }
@@ -114,7 +116,7 @@ const GetRegister = (): void => {
 }
 
 const ToActive = () => {
-  IsActive.value === "1"? IsActive.value = "0" : IsActive.value = "1";
+  IsActive.value === "1" ? IsActive.value = "0" : IsActive.value = "1";
   localStorage.setItem("login_register", IsActive.value);
 }
 

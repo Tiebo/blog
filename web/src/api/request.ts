@@ -1,6 +1,4 @@
 import axios from 'axios';
-import {useUserStore} from "@/stores/user";
-import router from "@/router";
 
 const createAxios = axios.create({
     baseURL: 'http://127.0.0.1:4000',
@@ -55,7 +53,6 @@ function get(url: string, params: object) {
 function post(url: string, params: object) {
     return apiAxios('POST', url, params)
 }
-
 
 export default {
     get,
