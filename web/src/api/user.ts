@@ -32,3 +32,7 @@ export function login(data: object) {
 export function getUserInfo(data: object) {
     return request.get("/user/account/info/", data).then(resp => resp.data);
 }
+
+export function getUserBaseById(data: object) {
+    return request.post("/user/info/base/", data).then(resp => resp.data)
+}

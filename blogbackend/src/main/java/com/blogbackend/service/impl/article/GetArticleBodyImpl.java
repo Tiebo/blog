@@ -1,14 +1,8 @@
 package com.blogbackend.service.impl.article;
 
 import com.alibaba.fastjson.JSONObject;
-import com.blogbackend.dao.mapper.ArticleBodyMapper;
-import com.blogbackend.dao.mapper.ArticleMapper;
-import com.blogbackend.dao.mapper.TagMapper;
-import com.blogbackend.dao.mapper.UserMapper;
-import com.blogbackend.dao.pojo.Article;
-import com.blogbackend.dao.pojo.ArticleBody;
-import com.blogbackend.dao.pojo.Tag;
-import com.blogbackend.dao.pojo.User;
+import com.blogbackend.dao.mapper.*;
+import com.blogbackend.dao.pojo.*;
 import com.blogbackend.service.article.GetArticleBodyService;
 import com.blogbackend.vo.Result;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +23,8 @@ public class GetArticleBodyImpl implements GetArticleBodyService {
     private ArticleMapper articleMapper;
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private CategoriesMapper categoriesMapper;
     @Override
     public Result getArticleById(Integer id) {
         // 查询article
@@ -45,6 +41,9 @@ public class GetArticleBodyImpl implements GetArticleBodyService {
             tags.add(tagMapper.selectById(tag_id));
         }
         tags.sort(Comparator.comparingInt(Tag::getTagViewCounts));
+        // 查询文章分类
+        String categoriesId = article.getCategoriesId();
+        Categories categories = categoriesMapper.selectById(categoriesId);
         // 查询作者
         User author = userMapper.selectById(article.getAuthorId());
         // 返回数据
@@ -55,6 +54,7 @@ public class GetArticleBodyImpl implements GetArticleBodyService {
         res.put("article", article);
         res.put("article_body", articleBody.getArticleBody());
         res.put("article_tags", tags);
+        res.put("article_categories",categories.getCategoriesName());
         res.put("article_author", author.getUsername());
         return Result.success(res);
     }

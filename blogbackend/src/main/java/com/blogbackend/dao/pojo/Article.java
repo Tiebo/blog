@@ -20,6 +20,7 @@ public class Article {
     private Date createDate;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Shanghai")
     private Date modifyDate;
+    private String categoriesId;
     // 简介
     private String description;
     private String title;

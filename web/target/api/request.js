@@ -17,24 +17,22 @@ function objectToFormData(obj) {
 function apiAxios(method, url, params) {
     const data = objectToFormData(params);
     if (data.get("token")) {
-        console.log("token");
         return createAxios({
             method: method,
             url: url,
-            data: method === 'POST' ? data : null,
-            params: method === 'GET' ? data : null,
+            data: method === "POST" ? data : null,
+            params: method === "GET" ? data : null,
             headers: {
                 authorization: "Bearer " + data.get("token"),
             }
         });
     }
     else {
-        console.log("no token");
         return createAxios({
             method: method,
             url: url,
-            data: method === 'POST' ? data : null,
-            params: method === 'GET' ? data : null,
+            data: method === "POST" ? data : null,
+            params: method === "GET" ? data : null,
         });
     }
 }

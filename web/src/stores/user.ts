@@ -54,6 +54,8 @@ export const useUserStore = defineStore('user', {
                 status: "",
                 pulling_info: false,
                 qqAccount: "",
+                qqPhoto: "",
+                qqName: "",
             })
             localStorage.removeItem("token");
         }

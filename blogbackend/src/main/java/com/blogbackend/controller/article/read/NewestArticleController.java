@@ -1,4 +1,4 @@
-package com.blogbackend.controller.Article;
+package com.blogbackend.controller.article.read;
 
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;

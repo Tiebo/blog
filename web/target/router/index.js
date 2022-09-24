@@ -22,7 +22,7 @@ const router = createRouter({
         },
         {
             path: '/articles/:article_id/',
-            name: 'archives_index',
+            name: 'articles_body_index',
             component: ArticleBodyView,
         },
         {

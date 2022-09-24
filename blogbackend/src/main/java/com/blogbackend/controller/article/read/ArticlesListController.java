@@ -1,4 +1,4 @@
-package com.blogbackend.controller.Article;
+package com.blogbackend.controller.article.read;
 
 import com.blogbackend.service.article.getArticlesService;
 import com.blogbackend.vo.Result;
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Map;
 
 @RestController
-public class ArticlesController {
+public class ArticlesListController {
     @Autowired
     private getArticlesService getArticlesService;
 
@@ -18,6 +18,7 @@ public class ArticlesController {
     public Result getArticles(@RequestParam Map<String, String> data) {
         int page = Integer.parseInt(data.get("page"));
         int pageSize = Integer.parseInt(data.get("pageSize"));
+        System.out.println("data = " + data);
         return getArticlesService.getArticles(page, pageSize);
     }
 }

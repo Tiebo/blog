@@ -4,6 +4,7 @@ import { useApiStore } from '@/stores/api';
 export const useArticlesStore = defineStore('articles', {
     state: () => {
         return {
+            author: new Map<string, string>
         }
     },
     actions: {

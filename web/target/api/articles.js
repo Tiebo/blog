@@ -1,5 +1,4 @@
 import request from "./request";
-import { useUserStore } from "@/stores/user";
 /**
  * @data {
  *     page: int, pageSize: int
@@ -24,8 +23,6 @@ export function orArticleByHot() {
 export function orArticleByCreateDate() {
     return request.get("/articles/info/newest/", {}).then(resp => resp.data);
 }
-export function getArticleBody(data) {
-    return request.get("/articles/info/body/", {
-        body_id: 1,
-    }).then(resp => resp.data);
+export function getArticleById(data) {
+    return request.post(`/articles/info/article/`, data).then(resp => resp.data);
 }

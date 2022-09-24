@@ -61,6 +61,7 @@ import router from "@/router";
 import { useApiStore } from "@/stores/api";
 import { useUserStore } from "@/stores/user";
 import { onMounted, onUnmounted, ref } from 'vue';
+import { qq_imgUrl } from "@/api/other";
 
 
 const $api = useApiStore();
@@ -83,15 +84,21 @@ onUnmounted(() => {
 })
 
 const GetLogin = (): void => {
+
   error_message.value = "";
   $api.apiUser.login({
     username: username.value,
     password: password.value
-  }).then(data => {
+  }).then(async data => {
     if (data.msg === "success") {
       userStore.token = data.data.token;
       localStorage.setItem("token", userStore.token);
-      userStore.updateInfo();
+      await userStore.updateInfo();
+      console.log(userStore.$state);
+      qq_imgUrl(userStore.qqAccount).then(resp => {
+        userStore.qqName = resp.name;
+        userStore.qqPhoto = resp.imgurl;
+      })
       router.push({ name: "home_index" });
     }
   })

@@ -35,8 +35,7 @@ export const useUserStore = defineStore('user', {
                 this.status = data.user.status;
                 this.qqAccount = data.user.qqAccount;
                 this.pulling_info = true;
-            })
-                .catch(resp => {
+            }).catch(resp => {
                 this.pulling_info = false;
             });
         },

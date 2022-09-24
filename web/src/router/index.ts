@@ -7,6 +7,7 @@ import CategoriesView from '@/views/CategoriesView.vue'
 import { useUserStore } from "@/stores/user";
 import ArticlesView from '@/views/ArticlesView.vue'
 import ArticleBodyView from '@/views/ArticleBodyView.vue'
+import UpdateArticleView from '@/views/UpdateArticleView.vue';
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -31,14 +32,24 @@ const router = createRouter({
             path: '/tags/',
             name: 'tags_index',
             component: TagsViewVue,
-            meta: {
-                requestAuth: true,
-            }
         },
         {
             path: '/categories/',
             name: 'categories_index',
             component: CategoriesView,
+        },
+        {
+            path: '/categories/:categories_id/',
+            name: 'categories_article_index',
+            component: CategoriesView,
+            meta: {
+                requestAuth: true,
+            }
+        },
+        {
+            path: '/content/:article_id/',
+            name: 'update_content_index',
+            component: UpdateArticleView,
             meta: {
                 requestAuth: true,
             }
@@ -62,7 +73,7 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
     if (to.meta.requestAuth && !useUserStore().is_login) {
-        next({ name: "login_index" });
+        next({ name: "home_index" });
     } else {
         next();
     }

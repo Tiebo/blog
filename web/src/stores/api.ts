@@ -7,6 +7,10 @@ export const useApiStore = defineStore('api', {
             apiArticles: api.articles,
             apiTags: api.tags,
             apiUser: api.user,
+            apiCategories: api.categories
         }
     }
 })
+export interface resp_type {
+    [key: string]: any;
+}

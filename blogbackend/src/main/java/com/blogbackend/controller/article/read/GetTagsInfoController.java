@@ -1,4 +1,4 @@
-package com.blogbackend.controller.Article;
+package com.blogbackend.controller.article.read;
 
 import com.blogbackend.service.article.getTagsInfoByArcService;
 import com.blogbackend.vo.Result;

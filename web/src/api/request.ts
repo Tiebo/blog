@@ -24,24 +24,22 @@ function objectToFormData(obj: formObject) {
 function apiAxios(method: string, url: any, params: object) {
     const data = objectToFormData(params as formObject);
     if (data.get("token")) {
-        console.log("token")
         return createAxios({
             method: method,
             url: url,
-            data: method === 'POST' ? data : null,
-            params: method === 'GET' ? data : null,
+            data: method === "POST"? data : null,
+            params: method === "GET"? data: null,
             headers: {
                 authorization: "Bearer " + data.get("token"),
             }
         })
     }
     else {
-        console.log("no token")
         return createAxios({
             method: method,
             url: url,
-            data: method === 'POST' ? data : null,
-            params: method === 'GET' ? data : null,
+            data: method === "POST"? data : null,
+            params: method === "GET"? data: null,
         })
     }
 }

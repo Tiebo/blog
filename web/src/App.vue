@@ -1,16 +1,40 @@
 <template>
   <NavBar />
   <RouterView />
+  <hr>
+  <footer>
+    <div>私人小屋 ©2022 Created by Tiebo</div>
+    <div class="number">
+      <a href="https://beian.miit.gov.cn/" target="_blank">
+        豫ICP备2022020047号
+      </a>
+    </div>
+  </footer>
 </template>
 
 <script setup lang="ts">
+import Footer from "@/components/Footer.vue";
+import { isMobileOrPc } from "@/utils/utils";
 import { RouterView } from 'vue-router'
 import NavBar from './components/NavBar.vue'
-
+// 移动端 rem 单位适配
+if (isMobileOrPc()) {
+  // width * 100 / 750 = width / 7.5
+  // 1rem = 100px
+  const width = window.screen.width;
+  window.document.getElementsByTagName("html")[0].style.fontSize =
+    width / 7.5 + "px";
+}
 </script>
 
 <style>
 * {
   font-family: "Maple Mono", serif;
+}
+
+footer {
+  color: #a69c9c;
+  font-size: 18px;
+  text-align: center;
 }
 </style>

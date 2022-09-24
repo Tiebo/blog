@@ -1,5 +1,4 @@
 import request from "./request"
-import { useUserStore } from "@/stores/user";
 
 
 /**
@@ -37,8 +36,23 @@ export function orArticleByCreateDate() {
     return request.get("/articles/info/newest/", {
     }).then(resp => resp.data);
 }
+
+/**
+ * @data {
+ *  id: string
+ * }
+ */
 export function getArticleById(data: object) {
     return request.post(`/articles/info/article/`,
         data
     ).then(resp => resp.data);
+}
+
+/**
+ * @data {
+ *  body_id: string
+ * }
+ */
+export function updateArticle(data: object) {
+    return request.post("/articles/update/info/", data).then(resp => resp.data)
 }
