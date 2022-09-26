@@ -18,8 +18,6 @@ public class GetArticleBodyImpl implements GetArticleBodyService {
     @Autowired
     private TagMapper tagMapper;
     @Autowired
-    private ArticleBodyMapper articleBodyMapper;
-    @Autowired
     private ArticleMapper articleMapper;
     @Autowired
     private UserMapper userMapper;
@@ -29,8 +27,6 @@ public class GetArticleBodyImpl implements GetArticleBodyService {
     public Result getArticleById(Integer id) {
         // 查询article
         Article article = articleMapper.selectById(id);
-        // 查询body
-        ArticleBody articleBody = articleBodyMapper.selectById(article.getBodyId());
         // 更新阅读次数
         article.setViewCounts(article.getViewCounts() + 1);
         articleMapper.updateById(article);
@@ -48,11 +44,10 @@ public class GetArticleBodyImpl implements GetArticleBodyService {
         User author = userMapper.selectById(article.getAuthorId());
         // 返回数据
         JSONObject res = new JSONObject();
-        article.setBodyId(0);
         article.setAuthorId(0);
         article.setTagsId("");
         res.put("article", article);
-        res.put("article_body", articleBody.getArticleBody());
+        res.put("article_body", article.getBody());
         res.put("article_tags", tags);
         res.put("article_categories",categories.getCategoriesName());
         res.put("article_author", author.getUsername());

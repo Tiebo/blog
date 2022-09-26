@@ -23,6 +23,7 @@ public class NewestArticleController {
         wrapper.orderBy(true, false, "create_date");
         List<Article> articles = articleMapper.selectList(wrapper);
         JSONObject res = new JSONObject();
+        articles.forEach(article -> article.setBody(""));
         res.put("data", articles);
         return Result.success(res);
     }

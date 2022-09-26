@@ -23,6 +23,33 @@ export function orArticleByHot() {
 export function orArticleByCreateDate() {
     return request.get("/articles/info/newest/", {}).then(resp => resp.data);
 }
+/**
+ * @data {
+ *  id: string
+ * }
+ */
 export function getArticleById(data) {
     return request.post(`/articles/info/article/`, data).then(resp => resp.data);
+}
+/**
+ * @data {
+ *  body_id: string
+ * }
+ */
+export function updateArticle(data) {
+    return request.post("/articles/update/info/", data).then(resp => resp.data);
+}
+/**
+ * @data {
+ *     id: userId,
+ *     title,
+ *     description,
+ *     tags: string,
+ *     categories: string,
+ *     article_body: string,
+ * }
+ * @param data
+ */
+export function postArticle(data) {
+    return request.post("articles/post/info/", data).then(resp => resp.data);
 }

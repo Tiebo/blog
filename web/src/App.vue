@@ -1,5 +1,8 @@
 <template>
-  <NavBar />
+  <el-affix :offset="0" change="get_change" scroll="scroll">
+    <NavBar />
+  </el-affix>
+
   <RouterView />
   <hr>
   <footer>
@@ -10,6 +13,9 @@
       </a>
     </div>
   </footer>
+    <el-backtop :bottom="100" class="back_top">
+        <i class="bi bi-arrow-bar-up"></i>
+    </el-backtop>
 </template>
 
 <script setup lang="ts">
@@ -25,6 +31,11 @@ if (isMobileOrPc()) {
   window.document.getElementsByTagName("html")[0].style.fontSize =
     width / 7.5 + "px";
 }
+
+document.addEventListener("scroll", function () {
+  if (document.documentElement.scrollTop >= 100) {
+  }
+})
 </script>
 
 <style>
@@ -33,8 +44,15 @@ if (isMobileOrPc()) {
 }
 
 footer {
-  color: #a69c9c;
+  color: #e3e1e1;
   font-size: 18px;
   text-align: center;
+}
+.back_top {
+  transition: background-color 300ms;
+}
+.back_top:hover {
+  background-color: #abc0d2 !important;
+  transition: background-color 300ms;
 }
 </style>

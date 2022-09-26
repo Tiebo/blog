@@ -4,13 +4,13 @@
       <div class="title" style="margin-bottom: 1vh">
         <span @click="router_to_body(data.article.id)" class="title">{{ data.article.title
         }}</span>
-        <span class="update" v-show="data.article.authorId == useUserStore().id"
+        <span class="update" v-show="data.article.authorId === useUserStore().id"
           @click="router_to_modify_article(data.article.id)">
           <i class="bi bi-brush"></i>
         </span>
       </div>
       <div class="description" style="margin-bottom: 1vh">
-        <span v-show="data.article.weight == 1" class="weight">置顶</span>
+        <span v-show="data.article.weight === 1" class="weight">置顶</span>
         &nbsp;&nbsp;&nbsp;&nbsp;{{ data.article.description }}
       </div>
       <div class="intro">
@@ -33,8 +33,8 @@
 <script lang="ts" setup>
 import { useApiStore } from "@/stores/api";
 import { useUserStore } from "@/stores/user";
+import type { articleData } from '@/types'
 import { ref, type Ref } from "vue";
-import type { articleData } from '@/types/index'
 import { useRouter } from "vue-router";
 
 const $api = useApiStore();
@@ -60,7 +60,7 @@ $api.apiArticles.getArticlesList({
   page: 1,
   pageSize: 10,
 }).then(data => {
-  articleData.value = data.data.resData;
+    articleData.value = data.data.resData;
 });
 
 const router_to_modify_article = (id: string) => {
@@ -108,7 +108,8 @@ const router_to_modify_article = (id: string) => {
 }
 
 .weight {
-  color: rgb(201, 69, 91);
+  width: 200px;
+  color: #d91e40;
   font-weight: 600;
   border: solid;
 }

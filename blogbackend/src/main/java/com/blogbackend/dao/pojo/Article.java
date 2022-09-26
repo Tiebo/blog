@@ -28,8 +28,8 @@ public class Article {
     // 是否置顶
     private Integer weight;
     private Integer authorId;
-    // 内容id
-    private Integer bodyId;
+    // 内容
+    private String body;
     // 类别id
     private String tagsId;
 }

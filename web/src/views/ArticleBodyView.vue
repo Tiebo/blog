@@ -37,7 +37,7 @@
             </span>
 
             <hr>
-            <div id="content"></div>
+            <Markdown v-if="article_body" :source="article_body" />
           </div>
         </div>
       </div>
@@ -46,11 +46,11 @@
 </template>
 
 <script setup lang="ts">
+import '@/assets/css/github.css'
+import Markdown from "@/components/Markdown.vue";
 import { useApiStore } from "@/stores/api";
-import markdown from '@/utils/markdown';
 import { onUnmounted, ref, type Ref } from 'vue';
 import { useRouter } from "vue-router";
-import { ElLoading } from 'element-plus'
 
 interface resp_type {
   [key: string]: any;
@@ -76,18 +76,6 @@ const get_article_info = () => {
     article_body.value = data.article_body;
     article_categories.value = data.article_categories;
     article_author.value = data.article_author;
-
-    const article_markdown = markdown.marked(article_body.value);
-
-    await article_markdown.then((res: any) => {
-      article_body.value = res.content;
-      article_toc.value = res.toc;
-    });
-
-    document.getElementById('content')!.innerHTML =
-      article_body.value;
-    document.getElementById('toc')!.innerHTML =
-      article_toc.value;
     pulling_info.value = false;
   })
 }
@@ -101,15 +89,14 @@ onUnmounted(() => {
 
 <style scoped>
 .markdown>h1 {
-  text-align: center;
-  font-size: 48px;
+  font-size: 36px;
   margin-bottom: 2vh;
 }
 
 .markdown>.label {
-  font-size: 18px;
+  font-size: 15px;
   font-weight: 500;
-  color: #656262
+  color: #5d5858
 }
 
 .card {
@@ -117,8 +104,8 @@ onUnmounted(() => {
   border-radius: 20px;
   background: linear-gradient(145deg, #e3e1e1, #cbc9c9);
   font-weight: bold;
-  font-size: 24px;
+  font-size: 20px;
   box-shadow: 5px 5px 5px #857e7e;
-  opacity: 0.75;
+  opacity: 0.85;
 }
 </style>

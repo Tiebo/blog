@@ -51,15 +51,15 @@ public class getArticlesImpl implements getArticlesService {
             // 获取文章分类
             String[] categoriesIds = article.getCategoriesId().split(",");
             StringBuilder stringBuilder = new StringBuilder();
-            Categories category = new Categories();
+            Categories category;
             for (String categoriesId: categoriesIds) {
                 category = categoriesMapper.selectById(categoriesId);
+                if (category == null) continue;
                 stringBuilder.append("/ ").append(category.getCategoriesName());
             }
             // 前缀处理
             stringBuilder.deleteCharAt(0);
-            // 获取标签信息
-
+            article.setBody("");
             resDates.add(new resDate(article, author.getUsername(),stringBuilder.toString(), null));
         }
         res.put("resData", resDates);

@@ -56,3 +56,18 @@ export function getArticleById(data: object) {
 export function updateArticle(data: object) {
     return request.post("/articles/update/info/", data).then(resp => resp.data)
 }
+
+/**
+ * @data {
+ *     id: userId,
+ *     title,
+ *     description,
+ *     tags: string,
+ *     categories: string,
+ *     article_body: string,
+ * }
+ * @param data
+ */
+export function postArticle(data: object) {
+    return request.post("articles/post/info/", data).then(resp => resp.data)
+}

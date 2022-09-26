@@ -1,13 +1,15 @@
+import { useUserStore } from "@/stores/user";
+import ArticleBodyView from '@/views/ArticleBodyView.vue'
+import ArticlesView from '@/views/ArticlesView.vue'
+import CategoriesView from '@/views/CategoriesView.vue'
 import TagsViewVue from '@/views/TagsView.vue';
+import UpdateArticleView from '@/views/UpdateArticleView.vue';
 import UserLoginView from '@/views/UserLoginView.vue';
 import { createRouter, createWebHistory } from 'vue-router';
 import homeView from '../views/HomeView.vue';
+import ListView from '../views/ListView.vue';
 import NotFound from '../views/NotFound.vue'
-import CategoriesView from '@/views/CategoriesView.vue'
-import { useUserStore } from "@/stores/user";
-import ArticlesView from '@/views/ArticlesView.vue'
-import ArticleBodyView from '@/views/ArticleBodyView.vue'
-import UpdateArticleView from '@/views/UpdateArticleView.vue';
+import PostArticleView from '../views/PostArticleView.vue'
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -53,6 +55,19 @@ const router = createRouter({
             meta: {
                 requestAuth: true,
             }
+        },
+        {
+            path: '/content/post/:userId/',
+            name: 'post_content_index',
+            component: PostArticleView,
+            meta: {
+                requestAuth: true,
+            }
+        },
+        {
+            path: '/list/',
+            name: 'list_index',
+            component: ListView,
         },
         {
             path: '/login/',

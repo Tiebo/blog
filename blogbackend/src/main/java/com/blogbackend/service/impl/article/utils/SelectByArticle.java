@@ -1,6 +1,5 @@
 package com.blogbackend.service.impl.article.utils;
 
-import com.blogbackend.dao.mapper.ArticleBodyMapper;
 import com.blogbackend.dao.mapper.CategoriesMapper;
 import com.blogbackend.dao.mapper.TagMapper;
 import com.blogbackend.dao.mapper.UserMapper;
@@ -15,8 +14,5 @@ public class SelectByArticle {
     private TagMapper tagMapper;
     @Autowired
     private CategoriesMapper categoriesMapper;
-    @Autowired
-    private ArticleBodyMapper articleBodyMapper;
-
 
 }

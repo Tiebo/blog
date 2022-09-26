@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div :class="scrollTop <= 120 ? 'container ': 'container affix' ">
     <nav class="navbar navbar-expand-lg">
       <div class="container-fluid">
         <a class="navbar-brand" href="#">
@@ -8,11 +8,33 @@
               <router-link v-show="!useUserStore().is_login" class="link" :to="{name: 'home_index'}">
                 MyBlog
               </router-link>
-              <router-link v-show="useUserStore().is_login" class="logo link" :to="{name: 'home_index'}">
-                <img :src="useUserStore().qqPhoto" alt="">
-                &nbsp;
-                <span>{{ useUserStore().qqName }}</span>
-              </router-link>
+              <div v-show="useUserStore().is_login" class="logo link">
+                <el-dropdown>
+                <span class="el-dropdown-link">
+                  <img :src="useUserStore().qqPhoto" class="user_photo">
+                  &shy;
+                  {{ useUserStore().qqName }}
+                  <el-icon class="el-icon--right">
+                    <arrow-down/>
+                  </el-icon>
+                </span>
+                  <template #dropdown>
+                    <el-dropdown-menu style="font-weight: bold">
+                      <el-dropdown-item>我的空间</el-dropdown-item>
+                      <el-dropdown-item divided>
+                        <router-link class="post_link"
+                            :to="{name: 'post_content_index',
+                            params:{
+                              userId : userStore.id? userStore.id: '0',
+                            }}"
+                        >
+                          发表文章
+                        </router-link>
+                      </el-dropdown-item>
+                    </el-dropdown-menu>
+                  </template>
+                </el-dropdown>
+              </div>
             </li>
           </ul>
         </a>
@@ -45,7 +67,7 @@
               </router-link>
             </li>
             <li>
-              <router-link class="link" :to="{name: 'tags_index'}">
+              <router-link class="link" :to="{name: 'list_index'}">
                 <i class="bi bi-music-note-list"></i>
                 List
               </router-link>
@@ -69,47 +91,60 @@
     </nav>
   </div>
 </template>
-    
+
 <script setup lang="ts">
 import { useUserStore } from "@/stores/user";
-import router from "@/router";
+import { ArrowDown } from '@element-plus/icons-vue'
+import { ref } from "vue";
 
 const userStore = useUserStore();
 if (localStorage.getItem("token")) {
   userStore.token = localStorage.getItem("token") as string;
   userStore.updateInfo();
 }
+let scrollTop = ref(document.documentElement.scrollTop);
+
+window.addEventListener("scroll", function () {
+  scrollTop.value = document.documentElement.scrollTop;
+})
+
 </script>
-    
+
 <style scoped>
-.logo>img {
+.logo > img {
   width: 6vh;
   border-radius: 50%;
 }
 
-.logo>span {
+.logo > span {
   font-size: 24px;
-  color: rgb(193, 191, 191);
+  color: #ffffff;
 }
 
 * {
   box-sizing: border-box;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
 }
-
-.container {
-  background: transparent;
+nav>*,nav {
+  padding-top: 0;
 }
-
+.container {
+  height: 8vh;
+  transition: 300ms;
+}
+.affix {
+  background-color: #4b4d50;
+  opacity: 0.85;
+  transition: 300ms;
+}
 nav ul li {
   list-style: none;
   display: inline-block;
-  padding: 5px 15px;
-  padding-top: 0;
+  padding: 0 15px 5px;
   margin: 10px;
   font-size: 20px;
   font-weight: bold;
-  color: rgb(193, 191, 191);
+  color: #ffffff;
   position: relative;
   z-index: 2;
   transition: color 0.5s;
@@ -117,7 +152,7 @@ nav ul li {
 
 nav ul li::after {
   content: '';
-  background: #964a58;
+  background: #b94b5e;
   width: 100%;
   height: 100%;
   border-radius: 30px;
@@ -131,7 +166,7 @@ nav ul li::after {
 }
 
 nav ul li:hover {
-  color: #fff;
+  color: #ffffff;
 }
 
 nav ul li:hover::after {
@@ -146,11 +181,28 @@ nav ul li:hover::after {
 
 .link {
   text-decoration: none;
-  color: rgb(193, 191, 191);
+  color: #e5e5e5;
+  font-weight: 550;
 }
 
 .link:hover {
   color: #fff;
+}
+.user_photo {
+  width: 5vh;
+  border-radius: 50%;
+  opacity: 0.85;
+}
+.example-showcase,.el-dropdown-link {
+  font-size: 24px;
+  cursor: pointer;
+  color: rgb(192, 186, 186);
+  display: flex;
+  align-items: center;
+}
+.post_link {
+  text-decoration: none;
+  color: #857e7e;
 }
 </style>
     

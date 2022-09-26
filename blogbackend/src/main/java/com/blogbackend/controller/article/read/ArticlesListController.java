@@ -18,7 +18,6 @@ public class ArticlesListController {
     public Result getArticles(@RequestParam Map<String, String> data) {
         int page = Integer.parseInt(data.get("page"));
         int pageSize = Integer.parseInt(data.get("pageSize"));
-        System.out.println("data = " + data);
         return getArticlesService.getArticles(page, pageSize);
     }
 }

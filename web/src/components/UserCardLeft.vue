@@ -1,8 +1,8 @@
-<template >
+<template>
   <div class="container">
     <div class="card">
       <div class="card-body">
-        <img class="photo " :src="qq_photo" alt="头像">
+        <img class="photo" id="user_photo" :src="qq_photo" alt="头像">
         <div class="username">{{ qq_name }}</div>
         <div class="row" style="margin-top: 1vh">
           <div class="col-3">
@@ -23,32 +23,54 @@
     <div class="card">
       <div class="card-body">
         <span class="label-link">
-          <i class="bi bi-arrow-right-square" />&nbsp;快速访问
+          <i class="bi bi-arrow-right-square"/>&nbsp;快速访问
         </span>
       </div>
       <div class="card-body" style="padding-top: 0">
         <div class="row">
-          <div class="col-4">主页</div>
-          <div class="col-4">CSDN</div>
-          <div class="col-4">Github</div>
+          <div class="col-3">
+            <router-link class="quick-link" :to="{name: 'home_index'}">
+              主页
+            </router-link>
+          </div>
+          <div class="col-4">
+            <a class="quick-link" target="_blank" href="https://blog.csdn.net/cTiebo?spm=1011.2415.3001.5343">
+              CSDN
+            </a>
+          </div>
+          <div class="col-5">
+            <a class="quick-link" target="_blank" href="https://github.com/Tiebo?tab=repositories">Github</a>
+          </div>
         </div>
         <div class="row" style="margin-top: 1vh">
-          <div class="col-4">知乎</div>
-          <div class="col-4">vue3</div>
-          <div class="col-4">Acwing</div>
+          <div class="col-3">
+            <a class="quick-link" target="_blank" href="https://www.zhihu.com/hot">
+              知乎
+            </a>
+          </div>
+          <div class="col-4">
+            <a class="quick-link" target="_blank" href="https://www.acwing.com/user/myspace/index/184248/">
+              Acwing
+            </a>
+            </div>
+          <div class="col-5">
+            <a class="quick-link" target="_blank" href="https://www.bilibili.com/">
+              Bilibili
+            </a>
+          </div>
         </div>
       </div>
     </div>
     <div class="card">
       <div class="card-body">
         <span class="label-link">
-          <i class="bi bi-archive-fill" />&nbsp;
+          <i class="bi bi-archive-fill"/>&nbsp;
           文章分类
         </span>
       </div>
       <div class="card-body" style="padding-top: 0">
         <div v-for="category of categories" @click="router_to_index(category.id, 'category')" :key="category.id"
-          class="row classification">
+             class="row classification">
           <div class="col-6" style="text-align: left">
             {{ category.categoriesName }}
           </div>
@@ -61,7 +83,7 @@
     <div class="card">
       <div class="card-body">
         <span class="label-link">
-          <i class="bi bi-archive-fill" />&nbsp;
+          <i class="bi bi-archive-fill"/>&nbsp;
           热门标签
         </span>
       </div>
@@ -79,7 +101,7 @@
     <div class="card">
       <div class="card-body">
         <span class="label-link">
-          <i class="bi bi-archive-fill" />&nbsp;
+          <i class="bi bi-archive-fill"/>&nbsp;
           网站信息
         </span>
       </div>
@@ -102,8 +124,8 @@
 import { qq_imgUrl } from "@/api/other";
 import { useApiStore } from "@/stores/api";
 import { useUserStore } from "@/stores/user";
-import { onMounted, ref, type Ref } from 'vue';
 import type { tag } from '@/types/index'
+import { onMounted, ref, type Ref } from 'vue';
 
 const $api = useApiStore();
 const userStore = useUserStore();
@@ -160,19 +182,19 @@ const router_to_index = (id: string, type: string) => {
 
 <style scoped>
 .classification:hover,
-.classification>* :hover {
+.classification > * :hover {
   background-color: #a19f9f;
   color: #eabf51;
   cursor: pointer;
 }
 
-.classification>div>a {
+.classification > div > a {
   background-color: #a19f9f;
   text-decoration: none;
 }
 
 .classification,
-.classification>* {
+.classification > * {
   transition: 200ms
 }
 
@@ -184,12 +206,17 @@ const router_to_index = (id: string, type: string) => {
 }
 
 .photo {
+  transition: 0.5s;
   width: 15vh;
   height: 15vh;
   border-radius: 50%;
 }
-
+.photo:hover {
+  border-radius: 20%;
+  box-shadow: 5px 10px 10px 5px #797373;
+}
 .username {
+  cursor: default;
   margin-top: 1vh;
   font-size: 24px;
   font-family: "Maple Mono", serif;
@@ -202,5 +229,9 @@ const router_to_index = (id: string, type: string) => {
   background: linear-gradient(145deg, #e3e1e1, #cbc9c9);
   box-shadow: 5px 5px 5px #857e7e;
   opacity: 0.75;
+}
+.quick-link {
+  text-decoration: none;
+  color: #0c0c0c;
 }
 </style>
