@@ -228,7 +228,7 @@ const router_to_index = (id: string, type: string) => {
   border-radius: 20px;
   background: linear-gradient(145deg, #e3e1e1, #cbc9c9);
   box-shadow: 5px 5px 5px #857e7e;
-  opacity: 0.75;
+  opacity: 0.85;
 }
 .quick-link {
   text-decoration: none;

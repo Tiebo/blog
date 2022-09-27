@@ -56,12 +56,11 @@
 
 
 <script setup lang="ts">
-import { type Ref } from 'vue';
+import { qq_imgUrl } from "@/api/other";
 import router from "@/router";
 import { useApiStore } from "@/stores/api";
 import { useUserStore } from "@/stores/user";
 import { onMounted, onUnmounted, ref } from 'vue';
-import { qq_imgUrl } from "@/api/other";
 
 
 const $api = useApiStore();

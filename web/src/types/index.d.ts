@@ -3,7 +3,11 @@ export interface tag {
     tagName: string,
     tagViewCounts: number,
 }
-
+export interface categories {
+    id: string,
+    categoriesName: string,
+    articleCounts: number,
+}
 export interface articleData {
     username: string,
     categories: string,

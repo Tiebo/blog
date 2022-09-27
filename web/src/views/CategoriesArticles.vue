@@ -1,19 +1,26 @@
 <template>
-  <div v-for="data of articleData" :key="data.article.id" class="card">
-    <div class="card-body">
-      <div class="title" style="margin-bottom: 1vh">
-        <span @click="router_to_body(data.article.id)" class="title">{{ data.article.title
-        }}</span>
-        <span class="update" v-show="data.article.authorId === useUserStore().id"
-          @click="router_to_modify_article(data.article.id)">
+    <div class="container">
+      <div class="row">
+        <div class="col-3">
+          <UserCardLeft/>
+        </div>
+        <div class="col-9">
+          <div  v-for="data of articleData"  :key="data.article.id" class="card">
+            <div class="card-body">
+              <div class="title" style="margin-bottom: 1vh">
+        <span @click="router_to_body(data.article.id)" class="title">{{
+            data.article.title
+          }}</span>
+                <span class="update" v-show="data.article.authorId === useUserStore().id"
+                      @click="router_to_modify_article(data.article.id)">
           <i class="bi bi-brush"></i>
         </span>
-      </div>
-      <div class="description" style="margin-bottom: 1vh">
-        <span v-show="data.article.weight === 1" class="weight">置顶</span>
-        &nbsp;&nbsp;&nbsp;&nbsp;{{ data.article.description }}
-      </div>
-      <div class="intro">
+              </div>
+              <div class="description" style="margin-bottom: 1vh">
+                <span v-show="data.article.weight === 1" class="weight">置顶</span>
+                &nbsp;&nbsp;&nbsp;&nbsp;{{ data.article.description }}
+              </div>
+              <div class="intro">
         <span style="float: left">
           <span>作者:{{ data.username }}</span>
           &nbsp;
@@ -21,26 +28,38 @@
           &nbsp;
           <span>标签:{{ data.article.tagsId }}</span>
         </span>
-        <span @click="router_to_body(data.article.id)" class="read-article">
+                <span @click="router_to_body(data.article.id)" class="read-article">
           阅读全文
           <i class="bi bi-arrow-right"></i>
         </span>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
 </template>
 
 <script lang="ts" setup>
+import UserCardLeft from '@/components/UserCardLeft.vue'
 import { useApiStore } from "@/stores/api";
 import { useUserStore } from "@/stores/user";
 import type { articleData } from '@/types'
-import { ref, type Ref } from "vue";
+import { ref } from "vue";
 import { useRouter } from "vue-router";
 
 const $api = useApiStore();
 const router = useRouter();
+const path_id = router.currentRoute.value.params.categories_id;
+$api.apiCategories.getArticlesByCategories({
+  page: 1,
+  pageSize: 10,
+  categories: path_id,
+}).then(resp => {
+  articleData.value = resp.data.resData;
+})
 
-let articleData: Ref<articleData[]> = ref([]);
+let articleData = ref<resp_type>([]);
 
 const router_to_body = (id: string) => {
 
@@ -51,15 +70,13 @@ const router_to_body = (id: string) => {
     }
   })
 }
-const get_articles_list = (pageSize: number) => {
-  $api.apiArticles.getArticlesList({
-    page: 1,
-    pageSize: pageSize,
-  }).then(data => {
-    articleData.value = data.data.resData;
-  });
+
+interface resp_type {
+  [key: string]: any;
 }
-get_articles_list(10);
+
+
+
 const router_to_modify_article = (id: string) => {
   router.push({
     name: "update_content_index",

@@ -1,6 +1,0 @@
-{
-  "dependencies": {
-    "markdown-it-anchor": "^8.6.5",
-    "markdown-it-toc-done-right": "^4.2.0"
-  }
-}

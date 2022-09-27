@@ -30,11 +30,12 @@
 <script setup lang = 'ts'>
 import UserCardLeft from '@/components/UserCardLeft.vue';
 import { useApiStore } from '@/stores/api';
-import { ref, type Ref } from 'vue';
+import type { tag } from "@/types";
+import { ref } from 'vue';
 
 const $api = useApiStore();
 
-let tags: Ref<any[]> = ref([]);
+let tags = ref<tag[]>([]);
 
 $api.apiTags.getHottestTag({}).then(resp => {
 

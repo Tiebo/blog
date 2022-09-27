@@ -79,8 +79,9 @@ import Markdown from "@/components/Markdown.vue";
 import UserCardLeft from '@/components/UserCardLeft.vue';
 import { useApiStore } from '@/stores/api';
 import { useUserStore } from "@/stores/user";
+import type { categories, tag } from "@/types";
 import { ElMessage } from 'element-plus';
-import { onMounted, reactive, ref } from 'vue';
+import { onMounted, reactive, ref, type Ref } from 'vue';
 import { useRouter } from 'vue-router';
 
 const $api = useApiStore();
@@ -88,8 +89,8 @@ const router = useRouter();
 const path_id = router.currentRoute.value.params.article_id as string;
 
 let value = ref(false);
-let select_tags = ref('');
-let select_categories = ref('');
+let select_tags: Ref<tag[]> = ref([]);
+let select_categories: Ref<categories[]> = ref([]);
 // 默认为true 已经提交完成
 let is_submit_finish = ref(true);
 // 默认为false 还未拉取成功
@@ -120,9 +121,9 @@ const get_animation = () => {
   }, 300);
 }
 
-const post_article = async () => {
-  is_submit_finish.value = false;
-  await $api.apiArticles.postArticle({
+const post_article = () => {
+  get_animation();
+  $api.apiArticles.postArticle({
     id: useUserStore().id,
     title: article_info.title,
     description: article_info.description,
@@ -133,7 +134,6 @@ const post_article = async () => {
   }).then(resp => {
     console.log(resp.data)
   })
-  is_pulling_finish.value = true;
 }
 
 const get_message = () => {

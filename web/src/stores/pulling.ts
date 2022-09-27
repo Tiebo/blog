@@ -1,9 +1,9 @@
 import { defineStore } from 'pinia'
 
-export const useArticlesStore = defineStore('articles', {
+export const usePullingStore = defineStore('pulling', {
     state: () => {
         return {
-
+            categories_is_article: false,
         }
     },
     actions: {

@@ -3,7 +3,7 @@
     <NavBar />
   </el-affix>
 
-  <RouterView />
+  <RouterView style="margin-top: 5vh"/>
   <hr>
   <footer>
     <div>私人小屋 ©2022 Created by Tiebo</div>

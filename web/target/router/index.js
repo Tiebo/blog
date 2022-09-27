@@ -6,6 +6,7 @@ import TagsViewVue from '@/views/TagsView.vue';
 import UpdateArticleView from '@/views/UpdateArticleView.vue';
 import UserLoginView from '@/views/UserLoginView.vue';
 import { createRouter, createWebHistory } from 'vue-router';
+import CategoriesArticlesView from '../views/CategoriesArticles.vue';
 import homeView from '../views/HomeView.vue';
 import ListView from '../views/ListView.vue';
 import NotFound from '../views/NotFound.vue';
@@ -40,11 +41,8 @@ const router = createRouter({
         },
         {
             path: '/categories/:categories_id/',
-            name: 'categories_article_index',
-            component: CategoriesView,
-            meta: {
-                requestAuth: true,
-            }
+            name: 'categories_articles_index',
+            component: CategoriesArticlesView,
         },
         {
             path: '/content/:article_id/',

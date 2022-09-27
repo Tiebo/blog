@@ -2,15 +2,15 @@
   <div class="container">
     <div class="row">
       <div class="col-3">
-        <UserCardLeft />
+        <UserCardLeft/>
       </div>
       <div class="col-9">
-        <div class="card">
+        <div class="card" >
           <div class="card-body">
             <h1>Categories</h1>
             <hr>
-
-            <div class="context" v-for="category of categories" :key="category.id">
+            <div @click="router_to_articles(category.id)" class="context" v-for="category of categories"
+                 :key="category.id">
               <span>
                 <i class="bi bi-folder-fill">
                 </i>
@@ -27,23 +27,29 @@
 </template>
 
 
-<script setup lang = 'ts'>
+<script setup lang='ts'>
 import UserCardLeft from '@/components/UserCardLeft.vue';
+import type { resp_type } from "@/stores/api";
 import { useApiStore } from '@/stores/api';
-import { ref, type Ref } from 'vue';
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 
 const $api = useApiStore();
-
-let categories: Ref<any[]> = ref([]);
+const router = useRouter();
+let categories = ref<resp_type>([]);
 
 $api.apiCategories.getCategoriesList({}).then(resp => {
-
   categories.value = resp.data.categories;
-
-
-
 })
 
+const router_to_articles = (id: string | number) => {
+  router.push({
+    name: 'categories_articles_index',
+    params: {
+      categories_id: id,
+    }
+  })
+}
 </script>
 
 
