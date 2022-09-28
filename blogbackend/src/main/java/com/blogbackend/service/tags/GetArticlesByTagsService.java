@@ -3,5 +3,5 @@ package com.blogbackend.service.tags;
 import com.blogbackend.vo.Result;
 
 public interface GetArticlesByTagsService {
-    Result GetArticlesByTags(String tags);
+    Result GetArticlesByTags(int page, int pageSize,String tags);
 }

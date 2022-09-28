@@ -15,11 +15,21 @@
       </div>
       <div class="intro">
         <span style="float: left">
-          <span>作者:{{ data.username }}</span>
-          &nbsp;
-          <span>{{ data.article.modifyDate }}</span>
-          &nbsp;
-          <span>标签:{{ data.article.tagsId }}</span>
+          <span>
+            <i class="bi bi-person-fill">{{ data.username }} </i>
+          </span>
+          &shy;
+          <span>
+            <i class="bi bi-calendar-day-fill">
+              {{ data.article.createDate.substring(0, 10) }}
+            </i>
+          </span>
+          &shy;
+          <span>
+            <i class="bi bi-tags-fill">
+              {{ data.tags }}
+            </i>
+          </span>
         </span>
         <span @click="router_to_body(data.article.id)" class="read-article">
           阅读全文
@@ -31,83 +41,89 @@
 </template>
 
 <script lang="ts" setup>
-import { useApiStore } from "@/stores/api";
-import { useUserStore } from "@/stores/user";
-import type { articleData } from '@/types'
-import { ref, type Ref } from "vue";
-import { useRouter } from "vue-router";
+  import { useApiStore } from "@/stores/api";
+  import { useUserStore } from "@/stores/user";
+  import type { articleData } from '@/types'
+  import { ref, type Ref } from "vue";
+  import { useRouter } from "vue-router";
 
-const $api = useApiStore();
-const router = useRouter();
+  const $api = useApiStore();
+  const router = useRouter();
 
-let articleData: Ref<articleData[]> = ref([]);
+  let articleData: Ref<articleData[]> = ref([]);
 
-const router_to_body = (id: string) => {
+  const router_to_body = (id: string) => {
 
-  router.push({
-    name: 'articles_body_index',
-    params: {
-      article_id: id
-    }
-  })
-}
-const get_articles_list = (pageSize: number) => {
-  $api.apiArticles.getArticlesList({
-    page: 1,
-    pageSize: pageSize,
-  }).then(data => {
-    articleData.value = data.data.resData;
-  });
-}
-get_articles_list(10);
-const router_to_modify_article = (id: string) => {
-  router.push({
-    name: "update_content_index",
-    params: {
-      article_id: id,
-    }
-  })
-}
+    router.push({
+      name: 'articles_body_index',
+      params: {
+        article_id: id
+      }
+    })
+  }
+  const get_articles_list = (pageSize: number) => {
+    $api.apiArticles.getArticlesList({
+      page: 1,
+      pageSize: pageSize,
+    }).then(data => {
+      articleData.value = data.data.resData;
+    });
+  }
+  get_articles_list(10);
+  const router_to_modify_article = (id: string) => {
+    router.push({
+      name: "update_content_index",
+      params: {
+        article_id: id,
+      }
+    })
+  }
 
 </script>
 
 <style scoped>
-.read-article {
-  color: blue;
-  float: right;
-  cursor: pointer;
-  transition: 300ms;
-  text-decoration: none;
-}
+  .read-article {
+    color: blue;
+    float: right;
+    cursor: pointer;
+    transition: 300ms;
+    text-decoration: none;
+  }
 
-.read-article:hover {
-  color: #ce1d1d;
-  transition: 300ms;
-}
+  .read-article:hover {
+    color: #ce1d1d;
+    transition: 300ms;
+  }
 
-.card {
-  margin-bottom: 2vh;
-  border-radius: 20px;
-  background: linear-gradient(145deg, #e3e1e1, #cbc9c9);
-  opacity: 0.75;
-  box-shadow: 5px 5px 5px #857e7e;
-}
+  .card {
+    margin-bottom: 2vh;
+    border-radius: 20px;
+    background: linear-gradient(145deg, #e3e1e1, #cbc9c9);
+    opacity: 0.75;
+    box-shadow: 5px 5px 5px #857e7e;
+  }
 
-.title {
-  cursor: pointer;
-  font-size: 24px;
-  text-align: center;
-}
+  .title {
+    cursor: pointer;
+    font-size: 24px;
+    text-align: center;
+  }
 
-.update {
-  float: right;
-  cursor: pointer;
-}
+  .update {
+    float: right;
+    cursor: pointer;
+  }
 
-.weight {
-  width: 200px;
-  color: #d91e40;
-  font-weight: 600;
-  border: solid;
-}
+  .weight {
+    width: 200px;
+    color: #d91e40;
+    font-weight: 600;
+    border: solid;
+  }
+
+  .intro {
+    cursor: default;
+    font-size: 14px;
+    color: #726e6e;
+  }
 </style>

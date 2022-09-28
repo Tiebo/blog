@@ -5,6 +5,7 @@
         <UserCardLeft />
       </div>
       <div class="col-9">
+
         <div v-for="data of articleData" :key="data.article.id" class="card">
           <div class="card-body">
             <div class="title" style="margin-bottom: 1vh">
@@ -33,8 +34,8 @@
                 </span>
                 &shy;
                 <span>
-                  <i class="bi bi-tags-fill">
-                    {{ data.tags }}
+                  <i class="bi bi-folder-fill">
+                    {{ data.categories }}
                   </i>
                 </span>
               </span>
@@ -62,19 +63,18 @@
   const path_id = () => router.currentRoute.value.params.id;
 
   watch(path_id, () => {
-    get_articles_categories();
+    get_articles_tags();
   })
-
-  const get_articles_categories = () => {
-    $api.apiCategories.getArticlesByCategories({
+  const get_articles_tags = () => {
+    $api.apiTags.getArticlesByTags({
       page: 1,
       pageSize: 10,
-      categories: path_id(),
+      tags: path_id(),
     }).then(resp => {
       articleData.value = resp.data.resData;
     })
   }
-  get_articles_categories();
+  get_articles_tags();
 
   let articleData = ref<resp_type>([]);
 

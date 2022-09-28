@@ -18,5 +18,5 @@ export function getHottestTag(data: object) {
  * @param data
  */
 export function getArticlesByTags(data: object) {
-    return request.get("/tags/info/articles/", data).then(resp => resp.data);
+    return request.post("/tags/info/articles/", data).then(resp => resp.data);
 }

@@ -1,16 +1,17 @@
-import { useUserStore } from "@/stores/user";
+import {useUserStore} from "@/stores/user";
 import ArticleBodyView from '@/views/ArticleBodyView.vue';
 import ArticlesView from '@/views/ArticlesView.vue';
 import CategoriesView from '@/views/CategoriesView.vue';
 import TagsViewVue from '@/views/TagsView.vue';
-import UpdateArticleView from '@/views/UpdateArticleView.vue';
 import UserLoginView from '@/views/UserLoginView.vue';
-import { createRouter, createWebHistory } from 'vue-router';
+import {createRouter, createWebHistory} from 'vue-router';
 import CategoriesArticlesView from '../views/CategoriesArticles.vue';
 import homeView from '../views/HomeView.vue';
 import ListView from '../views/ListView.vue';
 import NotFound from '../views/NotFound.vue';
 import PostArticleView from '../views/PostArticleView.vue';
+import TagsArticlesView from "@/views/TagsArticlesView.vue";
+
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
     routes: [
@@ -35,12 +36,17 @@ const router = createRouter({
             component: TagsViewVue,
         },
         {
+            path: '/tags/:id/',
+            name: 'tags_articles_index',
+            component: TagsArticlesView,
+        },
+        {
             path: '/categories/',
             name: 'categories_index',
             component: CategoriesView,
         },
         {
-            path: '/categories/:categories_id/',
+            path: '/categories/:id/',
             name: 'categories_articles_index',
             component: CategoriesArticlesView,
         },

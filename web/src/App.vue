@@ -1,4 +1,4 @@
-<template>
+<template >
   <el-affix :offset="0" change="get_change" scroll="scroll">
     <NavBar />
   </el-affix>

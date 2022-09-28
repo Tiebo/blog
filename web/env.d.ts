@@ -1,9 +1,9 @@
 /// <reference types="vite/client" />
 
-declare module 'vue3-markdown-it';
-declare module 'markdown-it-abbr';
-declare module 'markdown-it-deflist';
-declare module 'markdown-it-emoji';
-declare module 'markdown-it-sub';
-declare module 'markdown-it-sup';
-declare module 'markdown-it-toc-done-right';
+declare module '@kangc/v-md-editor/lib/theme/github.js';
+declare module '@kangc/v-md-editor';
+declare module '@kangc/v-md-editor/*';
+declare module '@kangc/v-md-editor/lib/preview'
+declare module '@kangc/v-md-editor/lib/theme/vuepress.js'
+declare module 'prismjs';
+declare module 'codemirror';

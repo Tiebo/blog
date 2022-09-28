@@ -24,7 +24,7 @@ public class GetArticlesByCategoriesImpl implements GetArticlesByCategoriesServi
 
         LambdaQueryWrapper<Article> qw = new LambdaQueryWrapper<>();
         qw.like(Article::getCategoriesId, categoriesIds);
-        qw.orderBy(true, false, Article::getCreateDate);
+        qw.orderBy(true, false, Article::getWeight, Article::getCreateDate);
         JSONObject res = Wrapper.getArticlesByWrapper(1, 10, qw);
 
         return Result.success(res);
