@@ -6,7 +6,7 @@ export function isMobileOrPc() {
     }
     return /Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent);
 }
-export function get_message(msg, type) {
+function get_message(msg, type) {
     if (type === "success") {
         ElMessage({
             message: msg,
@@ -18,8 +18,16 @@ export function get_message(msg, type) {
         ElMessage({
             message: msg,
             type: 'error',
-            offset: 250,
             duration: 1000
         });
+    }
+}
+export function resp_message(resp, msg, refresh_info) {
+    if (resp.msg === "success") {
+        get_message(msg, "success");
+        refresh_info();
+    }
+    else {
+        get_message(resp.msg, "error");
     }
 }

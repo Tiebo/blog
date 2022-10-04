@@ -5,8 +5,15 @@
         <div class="container">
           <div class="card">
             <div class="card-body">
-              <span class="title">文章目录</span>
-              <div id="toc" v-loading="pulling_info">
+              <div class="toc_title">文章目录</div>
+              <hr>
+              <div v-loading="pulling_info">
+                <div class="anchor-tag" :style="{ 
+                padding: `10px 0 10px ${anchor.indent * 20}px`, 
+                color: anchor.indent === 0 || anchor.indent === 1 ? `black`: '',}" v-for="anchor in state.titleData"
+                  :key="anchor" @click="handleAnchorClick(anchor)">
+                  {{ anchor.title }}
+                </div>
               </div>
             </div>
           </div>
@@ -36,12 +43,10 @@
               <i class="bi bi-eye-fill">
                 {{ article.viewCounts }} 次浏览
               </i>
-
             </span>
-
             <hr>
-            <v-md-preview v-if="article_body" :text="article_body"></v-md-preview>
-            <footer class="body_footer">更新于：{{article.modifyDate}}</footer>
+            <v-md-preview v-if="article_body" :text="article_body" ref="preview"></v-md-preview>
+            <footer class="body_footer">更新于：{{ article.modifyDate }}</footer>
           </div>
         </div>
       </div>
@@ -52,11 +57,11 @@
 <script setup lang="ts">
   import '@/assets/css/github.css'
   import { useApiStore } from "@/stores/api";
-  import { onUnmounted, ref, type Ref } from 'vue';
-  import { useRouter } from "vue-router";
-  import { Delete } from '@element-plus/icons-vue'
   import { useUserStore } from '@/stores/user';
+  import { Delete } from '@element-plus/icons-vue'
   import { ElMessage, ElMessageBox } from 'element-plus'
+  import { onMounted, onUnmounted, reactive, ref, type Ref } from 'vue';
+  import { useRouter } from "vue-router";
 
   interface resp_type {
     [key: string]: any;
@@ -66,6 +71,10 @@
   const router = useRouter();
   const userStore = useUserStore();
   const path_id = router.currentRoute.value.params.article_id as string;
+  const state: any = reactive({
+    titleData: []
+  })
+  const preview = ref();
 
   let article_body = ref('');
   let article_toc: any = ref('');
@@ -74,8 +83,8 @@
   let article: Ref<resp_type> = ref([]);
   let pulling_info = ref(true);
 
-  const get_article_info = () => {
-    useApiStore().apiArticles.getArticleById({
+  const get_article_info = async () => {
+    await useApiStore().apiArticles.getArticleById({
       id: path_id
     }).then(async resp => {
       const data: resp_type = resp.data;
@@ -92,7 +101,17 @@
     })
   }
 
-  get_article_info();
+  function handleAnchorClick(anchor: any) {
+    const { lineIndex } = anchor
+    const heading = preview.value.$el.querySelector(`[data-v-md-line="${lineIndex}"]`)
+    if (heading) {
+      preview.value.scrollToTarget({
+        target: heading,
+        scrollContainer: window,
+        top: 60
+      })
+    }
+  }
 
   const open = () => {
     ElMessageBox.confirm(
@@ -123,7 +142,33 @@
       })
     })
   }
+  onMounted(async () => {
+    await get_article_info();
 
+    const anchors = preview.value.$el.querySelectorAll("h1,h2,h3,h4,h5,h6");
+
+    const title = Array.from(anchors).filter((title: any) => {
+      return !!title.innerText.trim()
+    })
+    if (!title.length) {
+      state.titleData = []
+      return
+    }
+    const hTags = Array.from(
+      new Set(
+        title.map((title: any) => {
+          return title.tagName
+        })
+      )
+    ).sort()
+    state.titleData = title.map((el: any) => {
+      return {
+        title: el.innerText,
+        lineIndex: el.getAttribute('data-v-md-line'),
+        indent: hTags.indexOf(el.tagName)
+      }
+    })
+  })
   onUnmounted(() => {
     article_body.value = "";
     article_toc.value = "";
@@ -161,4 +206,20 @@
     font-size: medium;
   }
 
+  .toc_title {
+    text-align: center;
+    font-size: 30px;
+  }
+
+  .anchor-tag {
+    color: #5d5858;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 300ms;
+  }
+
+  .anchor-tag:hover {
+    background-color: rgba(202, 198, 198, 0.8);
+    color: rgb(128, 172, 170);
+  }
 </style>

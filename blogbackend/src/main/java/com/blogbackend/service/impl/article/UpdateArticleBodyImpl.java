@@ -60,7 +60,6 @@ public class UpdateArticleBodyImpl implements UpdateArticleBodyService {
             tagsId.append(",").append(tag_id);
         }
         tagsId.deleteCharAt(0);
-        UpdateCounts.set
         // 处理分类
         String[] categoriesSplit = categories.split(",");
         LambdaQueryWrapper<Categories> cateLqw = new LambdaQueryWrapper<>();
