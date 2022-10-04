@@ -95,7 +95,7 @@
             {{ tag.tagName }}
           </div>
           <div class="col-6" style="text-align: right">
-            ( {{ tag.tagViewCounts }} )
+            ( {{ tag.articleCounts }} )
           </div>
         </div>
       </div>
@@ -124,14 +124,14 @@
 </template>
 
 <script setup lang="ts">
-import { qq_imgUrl } from "@/api/other";
-import { useApiStore } from "@/stores/api";
-import { useUserStore } from "@/stores/user";
-import type { tag } from '@/types/index'
-import { onMounted, ref, type Ref } from 'vue';
-import { useRouter } from "vue-router";
+  import { qq_imgUrl } from "@/api/other";
+  import { useApiStore } from "@/stores/api";
+  import { useUserStore } from "@/stores/user";
+  import type { tag } from '@/types/index'
+  import { onMounted, ref, type Ref } from 'vue';
+  import { useRouter } from "vue-router";
 
-const $api = useApiStore();
+  const $api = useApiStore();
   const userStore = useUserStore();
   const router = useRouter();
 
@@ -241,12 +241,7 @@ const $api = useApiStore();
   }
 
   .card {
-    margin-bottom: 2vh;
     text-align: center;
-    border-radius: 20px;
-    background: linear-gradient(145deg, #e3e1e1, #cbc9c9);
-    box-shadow: 5px 5px 5px #857e7e;
-    opacity: 0.85;
   }
 
   .quick-link {

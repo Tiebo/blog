@@ -74,7 +74,8 @@ public class Wrapper {
                 stringBuilder.append("/ ").append(tag.getTagName());
             }
             // 前缀处理
-            stringBuilder.deleteCharAt(0);
+            if (!stringBuilder.toString().equals(""))
+                stringBuilder.deleteCharAt(0);
             article.setBody("");
             resDates.add(new resDate(article, author.getUsername(), categories.getCategoriesName(),stringBuilder.toString()));
         }

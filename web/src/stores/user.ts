@@ -9,7 +9,7 @@ export const useUserStore = defineStore('user', {
             token: "",
             photo: "",
             is_login: false,
-            is_admin: false,
+            is_admin: 0,
             description: "",
             email: "",
             mobile_photo: "",
@@ -29,7 +29,7 @@ export const useUserStore = defineStore('user', {
                     this.username = data.user.username;
                     this.photo = data.user.photo;
                     this.is_login = true;
-                    this.is_admin = data.user.admin;
+                    this.is_admin = data.user.isAdmin;
                     this.email = data.user.email;
                     this.description = data.user.description;
                     this.mobile_photo = data.user.mobilePhoneNumber;
@@ -47,7 +47,7 @@ export const useUserStore = defineStore('user', {
                 token: "",
                 photo: "",
                 is_login: false,
-                is_admin: false,
+                is_admin: 0,
                 description: "",
                 email: "",
                 mobile_photo: "",

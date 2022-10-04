@@ -1,7 +1,7 @@
 package com.blogbackend.service.article;
 
-import com.blogbackend.vo.Result;
+import com.blogbackend.vo.RespResult;
 
 public interface getTagsInfoByArcService {
-    Result getTagsInfoByArc(String strIds);
+    RespResult getTagsInfoByArc(String strIds);
 }

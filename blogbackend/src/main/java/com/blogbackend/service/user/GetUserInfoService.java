@@ -1,7 +1,7 @@
 package com.blogbackend.service.user;
 
-import com.blogbackend.vo.Result;
+import com.blogbackend.vo.RespResult;
 
 public interface GetUserInfoService {
-    Result getUserInfo();
+    RespResult getUserInfo();
 }

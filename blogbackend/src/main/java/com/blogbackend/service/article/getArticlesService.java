@@ -1,8 +1,8 @@
 package com.blogbackend.service.article;
 
-import com.blogbackend.vo.Result;
+import com.blogbackend.vo.RespResult;
 
 
 public interface getArticlesService {
-    Result getArticles(int page, int pageSize);
+    RespResult getArticles(int page, int pageSize);
 }

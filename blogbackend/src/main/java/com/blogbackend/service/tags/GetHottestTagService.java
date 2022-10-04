@@ -1,7 +1,7 @@
 package com.blogbackend.service.tags;
 
-import com.blogbackend.vo.Result;
+import com.blogbackend.vo.RespResult;
 
 public interface GetHottestTagService {
-    Result getHottestTag();
+    RespResult getHottestTag();
 }

@@ -1,7 +1,7 @@
 package com.blogbackend.service.article;
 
-import com.blogbackend.vo.Result;
+import com.blogbackend.vo.RespResult;
 
 public interface GetHottestArticleService {
-    Result getHottestArticle();
+    RespResult getHottestArticle();
 }

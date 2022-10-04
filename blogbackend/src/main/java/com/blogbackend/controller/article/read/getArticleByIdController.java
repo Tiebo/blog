@@ -1,7 +1,7 @@
 package com.blogbackend.controller.article.read;
 
 import com.blogbackend.service.article.GetArticleBodyService;
-import com.blogbackend.vo.Result;
+import com.blogbackend.vo.RespResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,7 +17,7 @@ public class getArticleByIdController {
 
 
     @PostMapping("/articles/info/article/")
-    public Result getArticleById(@RequestParam Map<String, String> data) {
+    public RespResult getArticleById(@RequestParam Map<String, String> data) {
         int id = Integer.parseInt(data.get("id"));
         return getArticleBodyService.getArticleById(id);
     }

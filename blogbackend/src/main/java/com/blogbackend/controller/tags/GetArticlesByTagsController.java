@@ -1,7 +1,7 @@
 package com.blogbackend.controller.tags;
 
 import com.blogbackend.service.tags.GetArticlesByTagsService;
-import com.blogbackend.vo.Result;
+import com.blogbackend.vo.RespResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,7 +16,7 @@ public class GetArticlesByTagsController {
     private GetArticlesByTagsService getArticlesByTagsService;
 
     @PostMapping("/tags/info/articles/")
-    public Result getArticlesByTags(@RequestParam Map<String, String> data) {
+    public RespResult getArticlesByTags(@RequestParam Map<String, String> data) {
         String tags = data.get("tags");
         int page = Integer.parseInt(data.get("page"));
         int pageSize = Integer.parseInt(data.get("pageSize"));

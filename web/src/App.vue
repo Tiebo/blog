@@ -3,7 +3,7 @@
     <NavBar />
   </el-affix>
 
-  <RouterView style="margin-top: 5vh"/>
+  <RouterView style="margin-top: 5vh" />
   <hr>
   <footer>
     <div>私人小屋 ©2022 Created by Tiebo</div>
@@ -13,46 +13,47 @@
       </a>
     </div>
   </footer>
-    <el-backtop :bottom="100" class="back_top">
-        <i class="bi bi-arrow-bar-up"></i>
-    </el-backtop>
+  <el-backtop :bottom="100" class="back_top">
+    <i class="bi bi-arrow-bar-up"></i>
+  </el-backtop>
 </template>
 
 <script setup lang="ts">
-import Footer from "@/components/Footer.vue";
-import { isMobileOrPc } from "@/utils/utils";
-import { RouterView } from 'vue-router'
-import NavBar from './components/NavBar.vue'
-// 移动端 rem 单位适配
-if (isMobileOrPc()) {
-  // width * 100 / 750 = width / 7.5
-  // 1rem = 100px
-  const width = window.screen.width;
-  window.document.getElementsByTagName("html")[0].style.fontSize =
-    width / 7.5 + "px";
-}
-
-document.addEventListener("scroll", function () {
-  if (document.documentElement.scrollTop >= 100) {
+  import { isMobileOrPc } from "@/utils/utils";
+  import { RouterView } from 'vue-router'
+  import NavBar from './components/NavBar.vue'
+  // 移动端 rem 单位适配
+  if (isMobileOrPc()) {
+    // width * 100 / 750 = width / 7.5
+    // 1rem = 100px
+    const width = window.screen.width;
+    window.document.getElementsByTagName("html")[0].style.fontSize =
+      width / 7.5 + "px";
   }
-})
+
+  document.addEventListener("scroll", function () {
+    if (document.documentElement.scrollTop >= 100) {
+    }
+  })
 </script>
 
 <style>
-* {
-  font-family: "Maple Mono", serif;
-}
+  * {
+    font-family: "Maple Mono", serif;
+  }
 
-footer {
-  color: #e3e1e1;
-  font-size: 18px;
-  text-align: center;
-}
-.back_top {
-  transition: background-color 300ms;
-}
-.back_top:hover {
-  background-color: #abc0d2 !important;
-  transition: background-color 300ms;
-}
+  footer {
+    color: #e3e1e1;
+    font-size: 18px;
+    text-align: center;
+  }
+
+  .back_top {
+    transition: background-color 300ms;
+  }
+
+  .back_top:hover {
+    background-color: #abc0d2 !important;
+    transition: background-color 300ms;
+  }
 </style>

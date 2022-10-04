@@ -7,7 +7,7 @@ import com.blogbackend.dao.mapper.UserMapper;
 import com.blogbackend.dao.pojo.Article;
 import com.blogbackend.service.categories.GetArticlesByCategoriesService;
 import com.blogbackend.service.impl.article.utils.Wrapper;
-import com.blogbackend.vo.Result;
+import com.blogbackend.vo.RespResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,13 +20,13 @@ public class GetArticlesByCategoriesImpl implements GetArticlesByCategoriesServi
     private UserMapper userMapper;
 
     @Override
-    public Result getArticlesByCategories(int page, int pageSize, String categoriesIds) {
+    public RespResult getArticlesByCategories(int page, int pageSize, String categoriesIds) {
 
         LambdaQueryWrapper<Article> qw = new LambdaQueryWrapper<>();
         qw.like(Article::getCategoriesId, categoriesIds);
         qw.orderBy(true, false, Article::getWeight, Article::getCreateDate);
         JSONObject res = Wrapper.getArticlesByWrapper(1, 10, qw);
 
-        return Result.success(res);
+        return RespResult.success(res);
     }
 }

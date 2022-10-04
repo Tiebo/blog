@@ -1,7 +1,7 @@
 export interface tag {
     id: string,
     tagName: string,
-    tagViewCounts: number,
+    articleCounts: number,
 }
 export interface categories {
     id: string,

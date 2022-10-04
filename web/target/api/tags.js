@@ -18,3 +18,9 @@ export function getHottestTag(data) {
 export function getArticlesByTags(data) {
     return request.post("/tags/info/articles/", data).then(resp => resp.data);
 }
+export function createTags(data) {
+    return request.post("/tags/create/info/", data).then(resp => resp.data);
+}
+export function removeTags(data) {
+    return request.post("/tags/remove/info/", data).then(resp => resp.data);
+}

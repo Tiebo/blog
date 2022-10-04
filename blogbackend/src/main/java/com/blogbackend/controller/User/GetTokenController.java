@@ -1,7 +1,7 @@
 package com.blogbackend.controller.User;
 
 import com.blogbackend.service.user.LoginService;
-import com.blogbackend.vo.Result;
+import com.blogbackend.vo.RespResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,7 +16,7 @@ public class GetTokenController {
     private LoginService loginService;
 
     @PostMapping("/user/account/token/")
-    public Result getToken(@RequestParam Map<String, String> data) {
+    public RespResult getToken(@RequestParam Map<String, String> data) {
         String username = data.get("username");
         String password = data.get("password");
         return loginService.getToken(username, password);

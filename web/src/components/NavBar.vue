@@ -10,24 +10,22 @@
               </router-link>
               <div v-show="useUserStore().is_login" class="logo link">
                 <el-dropdown>
-                <span class="el-dropdown-link">
-                  <img :src="useUserStore().qqPhoto" class="user_photo">
-                  &shy;
-                  {{ useUserStore().qqName }}
-                  <el-icon class="el-icon--right">
-                    <arrow-down/>
-                  </el-icon>
-                </span>
+                  <span class="el-dropdown-link">
+                    <img :src="useUserStore().qqPhoto" class="user_photo">
+                    &shy;
+                    {{ useUserStore().qqName }}
+                    <el-icon class="el-icon--right">
+                      <arrow-down />
+                    </el-icon>
+                  </span>
                   <template #dropdown>
                     <el-dropdown-menu style="font-weight: bold">
                       <el-dropdown-item>我的空间</el-dropdown-item>
                       <el-dropdown-item divided>
-                        <router-link class="post_link"
-                            :to="{name: 'post_content_index',
-                            params:{
-                              userId : userStore.id? userStore.id: '0',
-                            }}"
-                        >
+                        <router-link class="post_link" :to="{name: 'post_content_index',
+                        params:{
+                          id : userStore.id? userStore.id: '0',
+                        }}">
                           发表文章
                         </router-link>
                       </el-dropdown-item>
@@ -93,116 +91,125 @@
 </template>
 
 <script setup lang="ts">
-import { useUserStore } from "@/stores/user";
-import { ArrowDown } from '@element-plus/icons-vue'
-import { ref } from "vue";
+  import { useUserStore } from "@/stores/user";
+  import { ArrowDown } from '@element-plus/icons-vue'
+  import { ref } from "vue";
 
-const userStore = useUserStore();
-if (localStorage.getItem("token")) {
-  userStore.token = localStorage.getItem("token") as string;
-  userStore.updateInfo();
-}
-let scrollTop = ref(document.documentElement.scrollTop);
+  const userStore = useUserStore();
+  if (localStorage.getItem("token")) {
+    userStore.token = localStorage.getItem("token") as string;
+    userStore.updateInfo();
+  }
+  let scrollTop = ref(document.documentElement.scrollTop);
 
-window.addEventListener("scroll", function () {
-  scrollTop.value = document.documentElement.scrollTop;
-})
+  window.addEventListener("scroll", function () {
+    scrollTop.value = document.documentElement.scrollTop;
+  })
 
 </script>
 
 <style scoped>
-.logo > img {
-  width: 6vh;
-  border-radius: 50%;
-}
+  .logo>img {
+    width: 6vh;
+    border-radius: 50%;
+  }
 
-.logo > span {
-  font-size: 24px;
-  color: #ffffff;
-}
+  .logo>span {
+    font-size: 24px;
+    color: #ffffff;
+  }
 
-* {
-  box-sizing: border-box;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
-}
-nav>*,nav {
-  padding-top: 0;
-}
-.container {
-  height: 8vh;
-  transition: 300ms;
-}
-.affix {
-  background-color: #4b4d50;
-  opacity: 0.85;
-  transition: 300ms;
-}
-nav ul li {
-  list-style: none;
-  display: inline-block;
-  padding: 0 15px 5px;
-  margin: 10px;
-  font-size: 20px;
-  font-weight: bold;
-  color: #ffffff;
-  position: relative;
-  z-index: 2;
-  transition: color 0.5s;
-}
+  * {
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+  }
 
-nav ul li::after {
-  content: '';
-  background: #b94b5e;
-  width: 100%;
-  height: 100%;
-  border-radius: 30px;
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: -1;
-  opacity: 0;
-  transition: top 0.5s, opacity 0.5s;
-}
+  nav>*,
+  nav {
+    padding-top: 0;
+  }
 
-nav ul li:hover {
-  color: #ffffff;
-}
+  .container {
+    height: 8vh;
+    transition: 300ms;
+  }
 
-nav ul li:hover::after {
-  top: 50%;
-  opacity: 1;
-}
+  .affix {
+    background-color: #4b4d50;
+    opacity: 0.85;
+    transition: 300ms;
+  }
 
-.title {
-  font-size: 36px;
-  font-weight: 500;
-}
+  nav ul li {
+    list-style: none;
+    display: inline-block;
+    padding: 0 15px 5px;
+    margin: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #ffffff;
+    position: relative;
+    z-index: 2;
+    transition: color 0.5s;
+  }
 
-.link {
-  text-decoration: none;
-  color: #e5e5e5;
-  font-weight: 550;
-}
+  nav ul li::after {
+    content: '';
+    background: #b94b5e;
+    width: 100%;
+    height: 100%;
+    border-radius: 30px;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+    opacity: 0;
+    transition: top 0.5s, opacity 0.5s;
+  }
 
-.link:hover {
-  color: #fff;
-}
-.user_photo {
-  width: 5vh;
-  border-radius: 50%;
-  opacity: 0.85;
-}
-.example-showcase,.el-dropdown-link {
-  font-size: 24px;
-  cursor: pointer;
-  color: rgb(192, 186, 186);
-  display: flex;
-  align-items: center;
-}
-.post_link {
-  text-decoration: none;
-  color: #857e7e;
-}
+  nav ul li:hover {
+    color: #ffffff;
+  }
+
+  nav ul li:hover::after {
+    top: 50%;
+    opacity: 1;
+  }
+
+  .title {
+    font-size: 36px;
+    font-weight: 500;
+  }
+
+  .link {
+    text-decoration: none;
+    color: #e5e5e5;
+    font-weight: 550;
+  }
+
+  .link:hover {
+    color: #fff;
+  }
+
+  .user_photo {
+    width: 5vh;
+    border-radius: 50%;
+    opacity: 0.85;
+  }
+
+  .example-showcase,
+  .el-dropdown-link {
+    font-size: 24px;
+    cursor: pointer;
+    color: rgb(192, 186, 186);
+    display: flex;
+    align-items: center;
+  }
+
+  .post_link {
+    text-decoration: none;
+    color: #857e7e;
+  }
 </style>
     

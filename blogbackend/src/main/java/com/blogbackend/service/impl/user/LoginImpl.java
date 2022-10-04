@@ -6,7 +6,7 @@ import com.blogbackend.dao.pojo.User;
 import com.blogbackend.service.impl.utils.UserDetailsImpl;
 import com.blogbackend.service.user.LoginService;
 import com.blogbackend.utils.JwtUtil;
-import com.blogbackend.vo.Result;
+import com.blogbackend.vo.RespResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -24,7 +24,7 @@ public class LoginImpl implements LoginService {
     @Autowired
     private UserMapper userMapper;
     @Override
-    public Result getToken(String username, String password) {
+    public RespResult getToken(String username, String password) {
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(username, password);
         Authentication authenticate = authenticationManager.authenticate(authenticationToken);
         UserDetailsImpl userDetails = (UserDetailsImpl) authenticate.getPrincipal();
@@ -37,6 +37,6 @@ public class LoginImpl implements LoginService {
         JSONObject res = new JSONObject();
 
         res.put("token", jwt);
-        return Result.success(res);
+        return RespResult.success(res);
     }
 }

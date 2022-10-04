@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.blogbackend.dao.mapper.TagMapper;
 import com.blogbackend.dao.pojo.Tag;
 import com.blogbackend.service.article.getTagsInfoByArcService;
-import com.blogbackend.vo.Result;
+import com.blogbackend.vo.RespResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +17,7 @@ public class getTagsInfoByArcImpl implements getTagsInfoByArcService {
     @Autowired
     private TagMapper tagMapper;
     @Override
-    public Result getTagsInfoByArc(String strIds) {
+    public RespResult getTagsInfoByArc(String strIds) {
         List<Tag> tags = new ArrayList<>();
 
         String[] split = strIds.split(",");
@@ -28,6 +28,6 @@ public class getTagsInfoByArcImpl implements getTagsInfoByArcService {
         }
         JSONObject res = new JSONObject();
         res.put("tags", tags);
-        return Result.success(res);
+        return RespResult.success(res);
     }
 }

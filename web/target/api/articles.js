@@ -51,5 +51,13 @@ export function updateArticle(data) {
  * @param data
  */
 export function postArticle(data) {
-    return request.post("articles/post/info/", data).then(resp => resp.data);
+    return request.post("/articles/post/info/", data).then(resp => resp.data);
+}
+/**
+ * @data {
+ *      body_id: string | number;
+ * }
+ */
+export function deleteArticle(data) {
+    return request.post("/articles/delete/info/", data).then(resp => resp.data);
 }

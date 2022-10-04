@@ -52,7 +52,7 @@ const router = createRouter({
             component: CategoriesArticlesView,
         },
         {
-            path: '/content/update/:article_id/',
+            path: '/content/update/:id/',
             name: 'update_content_index',
             component: PostArticleView,
             meta: {
@@ -60,7 +60,7 @@ const router = createRouter({
             }
         },
         {
-            path: '/content/post/:userId/',
+            path: '/content/post/:id/',
             name: 'post_content_index',
             component: PostArticleView,
             meta: {

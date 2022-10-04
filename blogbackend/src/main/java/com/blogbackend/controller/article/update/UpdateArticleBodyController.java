@@ -1,7 +1,7 @@
 package com.blogbackend.controller.article.update;
 
 import com.blogbackend.service.article.UpdateArticleBodyService;
-import com.blogbackend.vo.Result;
+import com.blogbackend.vo.RespResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,7 +15,7 @@ public class UpdateArticleBodyController {
     private UpdateArticleBodyService updateArticleBodyService;
 
     @PostMapping("/articles/update/info/")
-    public Result updateArticleBody(@RequestParam Map<String, String> data) {
+    public RespResult updateArticleBody(@RequestParam Map<String, String> data) {
         return updateArticleBodyService.updateArticleBody(data);
     }
 }

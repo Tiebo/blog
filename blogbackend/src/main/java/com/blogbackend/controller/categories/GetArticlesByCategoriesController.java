@@ -1,7 +1,7 @@
 package com.blogbackend.controller.categories;
 
 import com.blogbackend.service.categories.GetArticlesByCategoriesService;
-import com.blogbackend.vo.Result;
+import com.blogbackend.vo.RespResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,7 +15,7 @@ public class GetArticlesByCategoriesController {
     private GetArticlesByCategoriesService getArticlesByCategoriesService;
 
     @PostMapping ("/categories/info/articles/")
-    public Result getArticlesByCategories(@RequestParam Map<String, String> data) {
+    public RespResult getArticlesByCategories(@RequestParam Map<String, String> data) {
         String categories = data.get("categories");
         int page = Integer.parseInt(data.get("page"));
         int pageSize = Integer.parseInt(data.get("pageSize"));

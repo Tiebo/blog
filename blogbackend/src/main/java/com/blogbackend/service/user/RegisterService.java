@@ -1,8 +1,8 @@
 package com.blogbackend.service.user;
 
 
-import com.blogbackend.vo.Result;
+import com.blogbackend.vo.RespResult;
 
 public interface RegisterService {
-    Result register(String username, String password, String confirmPassword);
+    RespResult register(String username, String password, String confirmPassword);
 }

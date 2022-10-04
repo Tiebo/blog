@@ -18,7 +18,7 @@ public class User {
     private String username;
     private String qqAccount;
     private String password;
-    private boolean isAdmin;
+    private Integer isAdmin;
     private String photo;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Shanghai")
     private Date createDate;

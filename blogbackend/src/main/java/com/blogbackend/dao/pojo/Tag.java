@@ -13,5 +13,5 @@ public class Tag {
     @TableId(type = IdType.AUTO)
     private Integer id;
     private String tagName;
-    private Integer tagViewCounts;
+    private Integer articleCounts;
 }

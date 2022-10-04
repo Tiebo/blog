@@ -4,8 +4,9 @@ import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.blogbackend.dao.mapper.UserMapper;
 import com.blogbackend.dao.pojo.User;
+import com.blogbackend.handler.SystemException;
 import com.blogbackend.service.user.RegisterService;
-import com.blogbackend.vo.Result;
+import com.blogbackend.vo.RespResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -21,36 +22,30 @@ public class RegisterImpl implements RegisterService {
     private PasswordEncoder passwordEncoder;
 
     @Override
-    public Result register(String username, String password, String confirmPassword) {
+    public RespResult register(String username, String password, String confirmPassword) {
         JSONObject res = new JSONObject();
         if (username == null || username.equals("")) {
-            res.put("error_message", "用户名不能为空");
-            return Result.success(res);
+            throw new SystemException(403, "用户名不能为空");
         }
         if (password == null || confirmPassword == null || password.equals("")) {
-            res.put("error_message", "密码不能为空");
-            return Result.success(res);
+            throw new SystemException(403, "密码不能为空");
         }
         if (!password.equals(confirmPassword)) {
-            res.put("error_message", "俩次密码不同");
-            return Result.success(res);
+            throw new SystemException(403, "俩次密码不同");
         }
         // 去空格
         username = username.trim();
         if (username.length() > 20) {
-            res.put("error_message", "用户名长度不能大于20");
-            return Result.success(res);
+            throw new SystemException(403, "用户名长度不能大于20");
         }
         if (password.length() > 30) {
-            res.put("error_message", "密码长度不能大于100");
-            return Result.success(res);
+            throw new SystemException(403, "密码长度不能大于100");
         }
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("username", username);
         User confirmUser = userMapper.selectOne(queryWrapper);
         if (confirmUser != null) {
-            res.put("error_message", "用户名已存在");
-            return Result.success(res);
+            throw new SystemException(403, "用户名已存在");
         }
 
         String encodePwd = passwordEncoder.encode(password);
@@ -60,7 +55,7 @@ public class RegisterImpl implements RegisterService {
                 username,
                 null,
                 encodePwd,
-                false,
+                0,
                 photo,
                 new Date(),
                 new Date(),
@@ -69,7 +64,7 @@ public class RegisterImpl implements RegisterService {
                 "在线"
         );
         userMapper.insert(user);
-        res.put("error_message", "success");
-        return Result.success(res);
+        res.put("msg", "success");
+        return RespResult.success(res);
     }
 }

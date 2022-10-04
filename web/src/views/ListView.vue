@@ -1,27 +1,16 @@
 <template>
   <div class="container">
-    <div class="card">
-      <div class="card-body">
-        <v-md-editor ></v-md-editor>
-      </div>
-    </div>
+    <v-md-editor v-model="text" height="500px" />
+
   </div>
 </template>
 
-<script setup lang="ts">
-import { useApiStore } from '@/stores/api';
-import { ref } from 'vue';
-
-const $api = useApiStore();
-
-  let content = ref('');
-
-  $api.apiArticles.getArticleById({
-    id: 1,
-  }).then(resp => {
-    content.value = resp.data.article_body;
-  })
-
+<script>
+export default {
+  data() {
+    return {
+      text: '$$sum_{i=1}^n a_i=0$$',
+    };
+  },
+};
 </script>
-
-<style scoped></style>

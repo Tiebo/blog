@@ -1,9 +1,9 @@
 package com.blogbackend.service.article;
 
-import com.blogbackend.vo.Result;
+import com.blogbackend.vo.RespResult;
 
 import java.util.Map;
 
 public interface PostArticleService {
-    Result postArticle(Map<String, String> data);
+    RespResult postArticle(Map<String, String> data);
 }

@@ -118,14 +118,6 @@
     transition: 300ms;
   }
 
-  .card {
-    margin-bottom: 2vh;
-    border-radius: 20px;
-    background: linear-gradient(145deg, #e3e1e1, #cbc9c9);
-    opacity: 0.75;
-    box-shadow: 5px 5px 5px #857e7e;
-  }
-
   .title {
     cursor: pointer;
     font-size: 24px;

@@ -53,7 +53,6 @@
   let articleData: Ref<articleData[]> = ref([]);
 
   const router_to_body = (id: string) => {
-
     router.push({
       name: 'articles_body_index',
       params: {
@@ -74,7 +73,7 @@
     router.push({
       name: "update_content_index",
       params: {
-        article_id: id,
+        id: id,
       }
     })
   }
@@ -95,13 +94,6 @@
     transition: 300ms;
   }
 
-  .card {
-    margin-bottom: 2vh;
-    border-radius: 20px;
-    background: linear-gradient(145deg, #e3e1e1, #cbc9c9);
-    opacity: 0.75;
-    box-shadow: 5px 5px 5px #857e7e;
-  }
 
   .title {
     cursor: pointer;

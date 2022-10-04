@@ -1,17 +1,16 @@
-import {useUserStore} from "@/stores/user";
+import { useUserStore } from "@/stores/user";
 import ArticleBodyView from '@/views/ArticleBodyView.vue';
 import ArticlesView from '@/views/ArticlesView.vue';
 import CategoriesView from '@/views/CategoriesView.vue';
+import TagsArticlesView from "@/views/TagsArticlesView.vue";
 import TagsViewVue from '@/views/TagsView.vue';
 import UserLoginView from '@/views/UserLoginView.vue';
-import {createRouter, createWebHistory} from 'vue-router';
+import { createRouter, createWebHistory } from 'vue-router';
 import CategoriesArticlesView from '../views/CategoriesArticles.vue';
 import homeView from '../views/HomeView.vue';
 import ListView from '../views/ListView.vue';
 import NotFound from '../views/NotFound.vue';
 import PostArticleView from '../views/PostArticleView.vue';
-import TagsArticlesView from "@/views/TagsArticlesView.vue";
-
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
     routes: [
@@ -51,15 +50,15 @@ const router = createRouter({
             component: CategoriesArticlesView,
         },
         {
-            path: '/content/:article_id/',
+            path: '/content/update/:id/',
             name: 'update_content_index',
-            component: UpdateArticleView,
+            component: PostArticleView,
             meta: {
                 requestAuth: true,
             }
         },
         {
-            path: '/content/post/:userId/',
+            path: '/content/post/:id/',
             name: 'post_content_index',
             component: PostArticleView,
             meta: {
@@ -88,7 +87,7 @@ const router = createRouter({
     ]
 });
 router.beforeEach((to, from, next) => {
-    if (to.meta.requestAuth && !useUserStore().is_login) {
+    if (to.meta.requestAuth && !useUserStore().token) {
         next({ name: "home_index" });
     }
     else {
