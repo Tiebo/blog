@@ -21,14 +21,16 @@
                   <template #dropdown>
                     <el-dropdown-menu style="font-weight: bold">
                       <el-dropdown-item>我的空间</el-dropdown-item>
-                      <el-dropdown-item divided>
-                        <router-link class="post_link" :to="{name: 'post_content_index',
-                        params:{
-                          id : userStore.id? userStore.id: '0',
-                        }}">
+                      <router-link class="router_link" :to="{name: 'post_content_index',
+                      params:{
+                        id : userStore.id? userStore.id: '0',
+                      }}">
+                        <el-dropdown-item divided>
+
                           发表文章
-                        </router-link>
-                      </el-dropdown-item>
+                        </el-dropdown-item>
+                      </router-link>
+
                     </el-dropdown-menu>
                   </template>
                 </el-dropdown>
@@ -47,21 +49,38 @@
               </router-link>
             </li>
             <li>
-              <router-link class="link" :to="{name: 'article_index'}">
-                <i class="bi bi-archive-fill"></i>
-                articles
-              </router-link>
+              <el-dropdown>
+                <span class="el-dropdown-link">
+                  <router-link class="link" :to="{name : 'article_index'}">
+                    <i class="bi bi-archive-fill"></i>
+                    articles
+                    <el-icon class="el-icon--right">
+                      <arrow-down />
+                    </el-icon>
+                  </router-link>
+                </span>
+                <template #dropdown>
+                  <el-dropdown-menu style="font-weight: bold">
+                    <router-link class="router_link" :to="{name: 'tags_index'}">
+                      <el-dropdown-item>
+                        <i class="bi bi-tags-fill"></i>
+                        Tags
+                      </el-dropdown-item>
+                    </router-link>
+                    <router-link class="router_link" :to="{name: 'categories_index'}">
+                      <el-dropdown-item divided>
+                        <i class="bi bi-folder-fill"></i>
+                        Categories
+                      </el-dropdown-item>
+                    </router-link>
+                  </el-dropdown-menu>
+                </template>
+              </el-dropdown>
             </li>
             <li>
-              <router-link class="link" :to="{name: 'tags_index'}">
-                <i class="bi bi-tags-fill"></i>
-                Tags
-              </router-link>
-            </li>
-            <li>
-              <router-link class="link" :to="{name: 'categories_index'}">
-                <i class="bi bi-folder-fill"></i>
-                Categories
+              <router-link class="link" :to="{name: 'list_index'}">
+                <i class="bi bi-bar-chart-line-fill"></i>
+                Commits
               </router-link>
             </li>
             <li>
@@ -135,9 +154,9 @@
   }
 
   .affix {
-    background-color: #4b4d50;
+    background-color: #4e4f51;
     opacity: 0.85;
-    transition: 300ms;
+    border-radius: 50px;
   }
 
   nav ul li {
@@ -198,16 +217,14 @@
     opacity: 0.85;
   }
 
-  .example-showcase,
   .el-dropdown-link {
-    font-size: 24px;
-    cursor: pointer;
-    color: rgb(192, 186, 186);
-    display: flex;
-    align-items: center;
+    margin-top: 3px;
+    font-size: 20px;
+    color: #ffffff;
+    transition: all 0.5s;
   }
 
-  .post_link {
+  .router_link {
     text-decoration: none;
     color: #857e7e;
   }

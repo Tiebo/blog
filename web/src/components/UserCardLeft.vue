@@ -169,6 +169,7 @@
     }
   }
 
+
   $api.apiTags.getHottestTag({}).then(data => {
     tags.value = data.data;
   })
@@ -178,6 +179,8 @@
   }).then(resp => {
     categories.value = resp.data.categories;
   })
+
+
   const router_to_index = (id: string, type: string) => {
     console.log(id)
     let name = "";

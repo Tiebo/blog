@@ -48,6 +48,7 @@ public class PostArticleImpl implements PostArticleService {
         }
 
         String title = data.get("title");
+        title = title.trim();
         String description = data.get("description");
         String tags = data.get("tags");
         String categories = data.get("categories");
@@ -61,7 +62,6 @@ public class PostArticleImpl implements PostArticleService {
         for (String tagName: TagSplit) {
             tagLqw.clear();
             tagLqw.eq("tag_name", tagName);
-            System.out.println(tagName);
             Integer tag_id = tagMapper.selectOne(tagLqw).getId();
             tagsId.append(",").append(tag_id);
         }
@@ -96,8 +96,7 @@ public class PostArticleImpl implements PostArticleService {
         );
         articleMapper.insert(article);
         Integer articleId = article.getId();
-        UpdateCounts updateCounts = new UpdateCounts();
-        updateCounts.setInfo(true, articleId);
+        UpdateCounts updateCounts = new UpdateCounts(true, articleId);
         updateCounts.start();
 
         res.put("msg", "success");

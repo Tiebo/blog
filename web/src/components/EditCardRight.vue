@@ -142,9 +142,11 @@
     if (full_path.includes('post')) {
       type_components.value = true;
       is_pulling_finish.value = true;
+      get_tags();
+      get_categories();
     } else if (full_path.includes('update')) {
-      refresh_info(path_id);
       type_components.value = false;
+      refresh_info(path_id);
     }
   })
 
@@ -194,26 +196,29 @@
       resp_message(resp, "更新成功", () => { });
     })
   }
-  const refresh_info = async (id: number | string) => {
+  const get_tags = async () => {
     await $api.apiTags.getHottestTag({}).then(resp => {
       all_tags.value = resp.data;
     })
+  }
 
+  const get_categories = async () => {
     await $api.apiCategories.getCategoriesList({}).then(resp => {
       all_categories.value = resp.data.categories;
     })
-
+  }
+  const refresh_info = async (id: number | string) => {
     await $api.apiArticles.getArticleById({
       id: id,
       token: userStore.token,
     }).then(resp => {
+      resp_message(resp, "", () => { });
       article_info.id = resp.data.article.id;
       article_info.title = resp.data.article.title;
       article_info.body = resp.data.article_body;
       article_info.tags = resp.data.article_tags;
       article_info.categories = resp.data.article_categories;
       article_info.description = resp.data.article.description;
-      is_pulling_finish.value = true;
       for (let tag of article_info.tags) {
         dynamicTags.value.push(tag.tagName);
       }
@@ -221,15 +226,14 @@
         dynamicCate.value.push(category.categoriesName);
       }
     })
+    is_pulling_finish.value = true;
   }
 
   const post_article = () => {
     get_animation();
-    console.log("🚀 -> path_id", path_id);
 
     $api.apiArticles.postArticle({
       id: path_id,
-
       title: article_info.title,
       description: article_info.description,
       tags: article_info.tags,

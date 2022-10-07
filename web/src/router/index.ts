@@ -2,11 +2,9 @@ import { useUserStore } from "@/stores/user";
 import ArticleBodyView from '@/views/ArticleBodyView.vue'
 import ArticlesView from '@/views/ArticlesView.vue'
 import CategoriesView from '@/views/CategoriesView.vue'
-import TagsArticlesView from "@/views/TagsArticlesView.vue";
 import TagsViewVue from '@/views/TagsView.vue';
 import UserLoginView from '@/views/UserLoginView.vue';
 import { createRouter, createWebHistory } from 'vue-router';
-import CategoriesArticlesView from '../views/CategoriesArticles.vue'
 import homeView from '../views/HomeView.vue';
 import ListView from '../views/ListView.vue';
 import NotFound from '../views/NotFound.vue'
@@ -39,7 +37,7 @@ const router = createRouter({
         {
             path: '/tags/:id/',
             name: 'tags_articles_index',
-            component: TagsArticlesView,
+            component: ArticlesView,
         },
         {
             path: '/categories/',
@@ -49,7 +47,7 @@ const router = createRouter({
         {
             path: '/categories/:id/',
             name: 'categories_articles_index',
-            component: CategoriesArticlesView,
+            component: ArticlesView,
         },
         {
             path: '/content/update/:id/',

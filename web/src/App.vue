@@ -20,22 +20,8 @@
 </template>
 
 <script setup lang="ts">
-import { isMobileOrPc } from "@/utils/utils";
-import { RouterView } from 'vue-router'
-import NavBar from './components/NavBar.vue' // 移动端 rem 单位适配
-// 移动端 rem 单位适配
-  if (isMobileOrPc()) {
-    // width * 100 / 750 = width / 7.5
-    // 1rem = 100px
-    const width = window.screen.width;
-    window.document.getElementsByTagName("html")[0].style.fontSize =
-      width / 7.5 + "px";
-  }
-
-  document.addEventListener("scroll", function () {
-    if (document.documentElement.scrollTop >= 100) {
-    }
-  })
+  import { RouterView } from 'vue-router'
+  import NavBar from './components/NavBar.vue' // 移动端 rem 单位适配
 </script>
 
 <style>

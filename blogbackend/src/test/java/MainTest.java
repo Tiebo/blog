@@ -18,8 +18,6 @@ public class MainTest {
             BufferedReader bufferedReader = new BufferedReader(streamReader);
             while ((content = bufferedReader.readLine()) != null)
                 stringBuilder.append(content);
-
-            System.out.println(stringBuilder.toString());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

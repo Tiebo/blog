@@ -27,7 +27,8 @@ function get_message(msg: string, type: string): void {
 
 export function resp_message(resp: any, msg: string, refresh_info: Function) {
     if (resp.msg === "success") {
-        get_message(msg, "success");
+        if (msg !== "")
+            get_message(msg, "success");
         refresh_info();
     } else {
         get_message(resp.msg, "error");

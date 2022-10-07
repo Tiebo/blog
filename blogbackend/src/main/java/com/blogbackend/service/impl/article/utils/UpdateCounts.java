@@ -1,6 +1,5 @@
 package com.blogbackend.service.impl.article.utils;
 
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.blogbackend.dao.mapper.ArticleMapper;
 import com.blogbackend.dao.mapper.CategoriesMapper;
 import com.blogbackend.dao.mapper.TagMapper;
@@ -10,6 +9,7 @@ import com.blogbackend.dao.pojo.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -29,37 +29,39 @@ public class UpdateCounts extends Thread{
     public void setArticleMapper(ArticleMapper articleMapper) {
         UpdateCounts.articleMapper = articleMapper;
     }
-    private boolean opType;
-    private static Integer id;
 
-    /**
-     *
-     * @param opType: true为加, false为减
-     * @param id
-     */
-    public void setInfo(boolean opType, Integer id) {
-        this.opType = opType;
-        UpdateCounts.id = id;
+    private boolean opType;
+
+    public UpdateCounts() {
     }
 
-    private void update(int con) {
-        Article article = articleMapper.selectById(id);
+    public UpdateCounts(boolean opType, Integer id) {
+        this.opType = opType;
+        this.id = id;
+    }
 
-        String tagsId = article.getTagsId();
-        String categoriesId = article.getCategoriesId();
+    private Integer id;
+
+    private void update(int con) {
+        Article article = articleMapper.selectById(this.id);
+
+        String[] categoriesId = article.getCategoriesId().split(",");
         // 更新分类
-        LambdaQueryWrapper<Categories> cateLqw = new LambdaQueryWrapper<>();
-        cateLqw.like(Categories::getId, categoriesId);
-        List<Categories> categoriesList = categoriesMapper.selectList(cateLqw);
+        List<Categories> categoriesList = new ArrayList<>();
+        for (String id: categoriesId) {
+            categoriesList.add(categoriesMapper.selectById(id));
+        }
         categoriesList.forEach(categories -> {
             Integer articleCounts = categories.getArticleCounts();
             categories.setArticleCounts(articleCounts + con);
             categoriesMapper.updateById(categories);
         });
         // 更新标签
-        LambdaQueryWrapper<Tag> lqw = new LambdaQueryWrapper<>();
-        lqw.like(Tag::getId, tagsId);
-        List<Tag> tags = tagMapper.selectList(lqw);
+        String[] tagsId = article.getTagsId().split(",");
+        List<Tag> tags = new ArrayList<>();
+        for (String id: tagsId) {
+            tags.add(tagMapper.selectById(id));
+        }
         tags.forEach(tag -> {
             Integer tagViewCounts = tag.getArticleCounts();
             tag.setArticleCounts(tagViewCounts + con);
@@ -68,7 +70,7 @@ public class UpdateCounts extends Thread{
     }
     @Override
     public void run() {
-        int con = opType ? 1 : -1;
+        int con = this.opType ? 1 : -1;
         update(con);
     }
 }

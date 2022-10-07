@@ -24,7 +24,7 @@ body {
 .card {
     margin-bottom: 2vh;
     border-radius: 20px;
-    background: linear-gradient(145deg, #e3e1e1, #cbc9c9);
-    opacity: 0.85;
-    box-shadow: 5px 5px 5px #857e7e;
+    background: linear-gradient(145deg, #f0eeee, #cbc9c9);
+    opacity: 0.9;
+    transition: all 300ms;
 }

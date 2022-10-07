@@ -4,16 +4,16 @@
       <div class="col-3">
         <div class="container">
           <div class="card">
-            <div class="card-body">
-              <div class="toc_title">文章目录</div>
+            <div class="card-body ">
+              <div class="toc_title">
+                <i class="bi bi-list-task"></i>
+                文章目录
+              </div>
               <hr>
-              <div v-loading="pulling_info">
-                <div class="anchor-tag" :style="{ 
-                padding: `10px 0 10px ${anchor.indent * 20}px`, 
-                color: anchor.indent === 0 || anchor.indent === 1 ? `black`: '',}" v-for="anchor in state.titleData"
-                  :key="anchor" @click="handleAnchorClick(anchor)">
-                  {{ anchor.title }}
-                </div>
+              <div v-loading="pulling_info" class="anchor-tag" :style="{ 
+              padding: `10px 0 10px ${anchor.indent * 20}px`, 
+              }" v-for="anchor in state.titleData" :key="anchor" @click="handleAnchorClick(anchor)">
+                {{ anchor.title }}
               </div>
             </div>
           </div>
@@ -55,7 +55,6 @@
 </template>
 
 <script setup lang="ts">
-  import '@/assets/css/github.css'
   import { useApiStore } from "@/stores/api";
   import { useUserStore } from '@/stores/user';
   import { Delete } from '@element-plus/icons-vue'
@@ -82,7 +81,6 @@
   let article_author = ref('');
   let article: Ref<resp_type> = ref([]);
   let pulling_info = ref(true);
-
   const get_article_info = async () => {
     await useApiStore().apiArticles.getArticleById({
       id: path_id
@@ -145,7 +143,7 @@
   onMounted(async () => {
     await get_article_info();
 
-    const anchors = preview.value.$el.querySelectorAll("h1,h2,h3,h4,h5,h6");
+    const anchors = preview.value.$el.querySelectorAll("h1,h2,h3");
 
     const title = Array.from(anchors).filter((title: any) => {
       return !!title.innerText.trim()
@@ -207,19 +205,23 @@
   }
 
   .toc_title {
-    text-align: center;
-    font-size: 30px;
+    font-size: 20px;
   }
 
   .anchor-tag {
-    color: #5d5858;
+    color: #2c2b2b;
     font-size: 16px;
+    font-weight: 800;
     cursor: pointer;
     transition: all 300ms;
   }
 
   .anchor-tag:hover {
     background-color: rgba(202, 198, 198, 0.8);
-    color: rgb(128, 172, 170);
+    color: rgb(112, 197, 191);
+  }
+
+  .toc {
+    overflow-y: scroll;
   }
 </style>

@@ -2,10 +2,10 @@
   <div class="container">
     <div class="row">
       <div class="col-3">
-        <UserCardLeft/>
+        <UserCardLeft />
       </div>
       <div class="col-9">
-        <EditCardRight/>
+        <EditCardRight />
       </div>
     </div>
   </div>
@@ -13,8 +13,7 @@
 
 
 <script setup lang='ts'>
-import EditCardRight from "@/components/EditCardRight.vue";
-import UserCardLeft from '@/components/UserCardLeft.vue';</script>
-
-<style scoped>
-</style>
+  import EditCardRight from "@/components/EditCardRight.vue";
+  import UserCardLeft from '@/components/UserCardLeft.vue';
+</script>
+<style scoped></style>

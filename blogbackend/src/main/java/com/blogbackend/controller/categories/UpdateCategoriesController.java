@@ -34,6 +34,7 @@ public class UpdateCategoriesController {
         if (categories == null) {
             throw new SystemException(403, "该分类不存在");
         }
+        name = name.trim();
         categories.setCategoriesName(name);
         categoriesMapper.updateById(categories);
         res.put("msg", "success");

@@ -18,8 +18,7 @@ public class DeleteArticleByIdImpl implements DeleteArticleByIdService {
     @Override
     public RespResult deleteArticleById(Integer id) {
         // 更新文章数
-        UpdateCounts updateCounts = new UpdateCounts();
-        updateCounts.setInfo(false, id);
+        UpdateCounts updateCounts = new UpdateCounts(false, id);
         updateCounts.start();
 
         articleMapper.deleteById(id);

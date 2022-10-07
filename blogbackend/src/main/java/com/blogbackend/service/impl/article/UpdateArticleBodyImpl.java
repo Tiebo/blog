@@ -46,8 +46,11 @@ public class UpdateArticleBodyImpl implements UpdateArticleBodyService {
         String description = data.get("description");
         String title = data.get("title");
         String categories = data.get("categories");
-        System.out.println(tags);
+        title = title.trim();
         JSONObject res = new JSONObject();
+        // 先把标签和分类文章数减去
+        UpdateCounts removeCounts = new UpdateCounts(false, id);
+        removeCounts.start();
         // 处理标签
         String[] TagSplit = tags.split(",");
         QueryWrapper<Tag> tagLqw = new QueryWrapper<>();
@@ -55,7 +58,6 @@ public class UpdateArticleBodyImpl implements UpdateArticleBodyService {
         for (String tagName: TagSplit) {
             tagLqw.clear();
             tagLqw.eq("tag_name", tagName);
-            System.out.println(tagName);
             Integer tag_id = tagMapper.selectOne(tagLqw).getId();
             tagsId.append(",").append(tag_id);
         }
@@ -78,6 +80,7 @@ public class UpdateArticleBodyImpl implements UpdateArticleBodyService {
             throw new SystemException(403, "你只能修改自己的文章");
         }
         JudgeUtils.judgeArticle(body, tags, title, categories);
+
         // 更新article
         article.setTitle(title);
         article.setDescription(description);
@@ -86,6 +89,9 @@ public class UpdateArticleBodyImpl implements UpdateArticleBodyService {
         article.setModifyDate(new Date());
         article.setBody(body);
         articleMapper.updateById(article);
+        // 先把标签和分类文章数减去
+        UpdateCounts increaseCounts = new UpdateCounts(true, article.getId());
+        increaseCounts.start();
         // 返回结果
         res.put("msg", "success");
         return RespResult.success(res);

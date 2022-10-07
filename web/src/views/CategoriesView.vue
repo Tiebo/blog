@@ -7,8 +7,8 @@
       <div class="col-9">
         <div class="card">
           <div class="card-body">
-            <h2 style="text-align: center;">Categories</h2>
-            <el-button v-show="userStore.is_admin === 1" class="edit" type="primary" @click="edit_categories(-1)"
+            <span style="text-align: center;font-size: 24px;">Categories</span>
+            <el-button v-show="userStore.is_admin === 1" class="edit" type="primary" @click="edit_categories(-1, '')"
               :icon="Edit" circle />
             <hr>
             <div class="context" v-for="category of categories" :key="category.id">
@@ -20,7 +20,8 @@
                   ({{ category.articleCounts }})
                 </span>
                 <span style="float: right;" v-show="userStore.is_admin === 1">
-                  <el-button text @click="edit_categories(category.id)" type="primary" :icon="Edit" circle />
+                  <el-button text @click="edit_categories(category.id, category.categoriesName)" type="primary"
+                    :icon="Edit" circle />
                   <el-button text @click="delete_categories(category.id)" type="danger" :icon="Delete" circle />
                 </span>
               </div>
@@ -63,10 +64,11 @@
       }
     })
   }
-  const edit_categories = (id: string | number | undefined) => {
+  const edit_categories = (id: string | number | undefined, content: string) => {
     ElMessageBox.prompt('请输入名称', '提交信息', {
       confirmButtonText: 'OK',
       cancelButtonText: 'Cancel',
+      inputValue: content
     }).then(({ value }) => {
       if (id !== -1) {
         $api.apiCategories.updateCategories({
