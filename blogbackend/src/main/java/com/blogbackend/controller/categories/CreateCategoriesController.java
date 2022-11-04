@@ -17,7 +17,7 @@ public class CreateCategoriesController {
     @Autowired
     private CategoriesMapper categoriesMapper;
 
-    @PostMapping("/categories/create/info/")
+    @PostMapping("/api/categories/create/info/")
     public RespResult CreateCategories(@RequestParam Map<String, String> data) {
         String categoriesName = data.get("categoriesName");
         JSONObject res = new JSONObject();

@@ -12,7 +12,7 @@ public class GetHottestTagController {
     @Autowired
     private GetHottestTagService getHottestTagService;
 
-    @GetMapping("/tags/info/hottest/")
+    @GetMapping("/api/tags/info/hottest/")
     public RespResult getHottestTag() {
         return getHottestTagService.getHottestTag();
     }

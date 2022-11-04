@@ -14,7 +14,7 @@ public class GetArticlesByCategoriesController {
     @Autowired
     private GetArticlesByCategoriesService getArticlesByCategoriesService;
 
-    @PostMapping ("/categories/info/articles/")
+    @PostMapping ("/api/categories/info/articles/")
     public RespResult getArticlesByCategories(@RequestParam Map<String, String> data) {
         String categories = data.get("categories");
         int page = Integer.parseInt(data.get("page"));

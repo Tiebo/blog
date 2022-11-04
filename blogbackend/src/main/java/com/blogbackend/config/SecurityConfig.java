@@ -37,12 +37,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/user/account/token/",
-                        "/user/account/register/",
-                        "/articles/info/*/",
-                        "/tags/info/*/",
-                        "/user/info/*/",
-                        "/categories/info/*/"
+                .antMatchers("/api/user/account/token/",
+                        "/api/articles/info/*/",
+                        "/api/tags/info/*/",
+                        "/api/user/info/*/",
+                        "/api/categories/info/*/"
                 ).permitAll()
                 .antMatchers(HttpMethod.OPTIONS).permitAll()
                 .anyRequest().authenticated();

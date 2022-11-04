@@ -17,7 +17,7 @@ public class NewestArticleController {
     @Autowired
     private ArticleMapper articleMapper;
 
-    @GetMapping("/articles/info/newest/")
+    @GetMapping("/api/articles/info/newest/")
     public RespResult getNewestArticle() {
         QueryWrapper<Article> wrapper = new QueryWrapper<>();
         wrapper.orderBy(true, false, "create_date");

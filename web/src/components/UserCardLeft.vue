@@ -175,7 +175,6 @@
   })
 
   $api.apiCategories.getCategoriesList({
-    token: userStore.token,
   }).then(resp => {
     categories.value = resp.data.categories;
   })

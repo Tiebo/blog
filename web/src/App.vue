@@ -22,11 +22,12 @@
 <script setup lang="ts">
   import { RouterView } from 'vue-router'
   import NavBar from './components/NavBar.vue' // 移动端 rem 单位适配
+
 </script>
 
 <style>
   * {
-    font-family: "Maple Mono", serif;
+    font-family: 'Courier New', Courier, monospace;
   }
 
   footer {

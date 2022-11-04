@@ -12,7 +12,7 @@ public class GetHottestArticleController {
     @Autowired
     private GetHottestArticleService getHottestArticleService;
 
-    @GetMapping("/articles/info/hottest/")
+    @GetMapping("/api/articles/info/hottest/")
     public RespResult getHottestArticle() {
         return getHottestArticleService.getHottestArticle();
     }

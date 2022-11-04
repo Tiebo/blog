@@ -14,7 +14,7 @@ public class CreateTagsController {
     @Autowired
     private CreateTagsService createTagsService;
 
-    @PostMapping("/tags/create/info/")
+    @PostMapping("/api/tags/create/info/")
     public RespResult CreateTags(@RequestParam Map<String, String> data) {
         return createTagsService.CreateTags(data);
     }

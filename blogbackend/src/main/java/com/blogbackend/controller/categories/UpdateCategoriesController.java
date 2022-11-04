@@ -18,7 +18,7 @@ public class UpdateCategoriesController {
     @Autowired
     private CategoriesMapper categoriesMapper;
 
-    @PostMapping("/categories/update/info/")
+    @PostMapping("/api/categories/update/info/")
     public RespResult updateCategories(@RequestParam Map<String, String> data) {
         JudgeUtils.judgeAdmin();
 

@@ -14,7 +14,7 @@ public class GetTagsInfoController {
     @Autowired
     private getTagsInfoByArcService getTagsInfoByArcService;
 
-    @PostMapping("/articles/info/articles/")
+    @PostMapping("/api/articles/info/articles/")
     public RespResult getTagsInfo(@RequestParam Map<String, String> data) {
         String Ids = data.get("tagsId");
         return getTagsInfoByArcService.getTagsInfoByArc(Ids);

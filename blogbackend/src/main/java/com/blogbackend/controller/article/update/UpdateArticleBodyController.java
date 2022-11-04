@@ -14,7 +14,7 @@ public class UpdateArticleBodyController {
     @Autowired
     private UpdateArticleBodyService updateArticleBodyService;
 
-    @PostMapping("/articles/update/info/")
+    @PostMapping("/api/articles/update/info/")
     public RespResult updateArticleBody(@RequestParam Map<String, String> data) {
         return updateArticleBodyService.updateArticleBody(data);
     }

@@ -16,7 +16,7 @@ public class getCategoriesListController {
     @Autowired
     private CategoriesMapper categoriesMapper;
 
-    @GetMapping("/categories/info/getlist/")
+    @GetMapping("/api/categories/info/getlist/")
     public RespResult getCategoriesList() {
         LambdaQueryWrapper<Categories> qw = new LambdaQueryWrapper<>();
         qw.orderBy(true, false, Categories::getArticleCounts);

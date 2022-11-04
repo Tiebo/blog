@@ -11,7 +11,7 @@ public class GetUserInfoController {
     @Autowired
     private GetUserInfoService getUserInfoService;
 
-    @GetMapping("/user/account/info/")
+    @GetMapping("/api/user/account/info/")
     public RespResult getUserInfo() {
         return getUserInfoService.getUserInfo();
     }

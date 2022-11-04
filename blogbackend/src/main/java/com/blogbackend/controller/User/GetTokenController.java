@@ -15,7 +15,7 @@ public class GetTokenController {
     @Autowired
     private LoginService loginService;
 
-    @PostMapping("/user/account/token/")
+    @PostMapping("/api/user/account/token/")
     public RespResult getToken(@RequestParam Map<String, String> data) {
         String username = data.get("username");
         String password = data.get("password");

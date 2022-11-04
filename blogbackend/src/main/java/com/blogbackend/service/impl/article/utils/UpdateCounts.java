@@ -35,6 +35,11 @@ public class UpdateCounts extends Thread{
     public UpdateCounts() {
     }
 
+    /**
+     *
+     * @param opType ture -> 加  false -> 减
+     * @param id
+     */
     public UpdateCounts(boolean opType, Integer id) {
         this.opType = opType;
         this.id = id;

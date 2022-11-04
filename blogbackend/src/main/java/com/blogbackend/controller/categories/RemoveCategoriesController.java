@@ -15,7 +15,7 @@ public class RemoveCategoriesController {
     @Autowired
     private RemoveCategoriesService removeCategoriesService;
 
-    @PostMapping("/categories/remove/info/")
+    @PostMapping("/api/categories/remove/info/")
     public RespResult removeCategories(@RequestParam Map<String, String> data) {
         Integer id = Integer.valueOf(data.get("id"));
         return removeCategoriesService.removeCategories(id);

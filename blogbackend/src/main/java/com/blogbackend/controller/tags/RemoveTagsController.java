@@ -15,7 +15,7 @@ public class RemoveTagsController {
     @Autowired
     private RemoveTagsService removeTagsService;
 
-    @PostMapping("/tags/remove/info/")
+    @PostMapping("/api/tags/remove/info/")
     public RespResult removeTags(@RequestParam Map<String, String> data) {
         Integer tag_id = Integer.valueOf(data.get("tag_id"));
         return removeTagsService.removeTags(tag_id);

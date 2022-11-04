@@ -16,7 +16,7 @@ public class getArticleByIdController {
     private GetArticleBodyService  getArticleBodyService;
 
 
-    @PostMapping("/articles/info/article/")
+    @PostMapping("/api/articles/info/article/")
     public RespResult getArticleById(@RequestParam Map<String, String> data) {
         int id = Integer.parseInt(data.get("id"));
         return getArticleBodyService.getArticleById(id);

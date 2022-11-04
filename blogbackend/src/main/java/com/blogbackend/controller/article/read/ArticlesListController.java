@@ -14,7 +14,7 @@ public class ArticlesListController {
     @Autowired
     private getArticlesService getArticlesService;
 
-    @PostMapping("/articles/info/getlist/")
+    @PostMapping("/api/articles/info/getlist/")
     public RespResult getArticles(@RequestParam Map<String, String> data) {
         int page = Integer.parseInt(data.get("page"));
         int pageSize = Integer.parseInt(data.get("pageSize"));

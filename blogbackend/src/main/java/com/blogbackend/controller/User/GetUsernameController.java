@@ -17,7 +17,7 @@ public class GetUsernameController {
     @Autowired
     private UserMapper userMapper;
 
-    @PostMapping("/user/info/base/")
+    @PostMapping("/api/user/info/base/")
     RespResult getUserInfoById(@RequestParam Map<String, String> map) {
         Integer id = Integer.valueOf(map.get("id"));
         User user = userMapper.selectById(id);

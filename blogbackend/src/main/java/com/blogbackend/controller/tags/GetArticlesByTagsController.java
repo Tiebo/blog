@@ -15,7 +15,7 @@ public class GetArticlesByTagsController {
     @Autowired
     private GetArticlesByTagsService getArticlesByTagsService;
 
-    @PostMapping("/tags/info/articles/")
+    @PostMapping("/api/tags/info/articles/")
     public RespResult getArticlesByTags(@RequestParam Map<String, String> data) {
         String tags = data.get("tags");
         int page = Integer.parseInt(data.get("page"));

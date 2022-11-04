@@ -15,8 +15,9 @@ public class DeleteArticleByIdController {
     @Autowired
     private DeleteArticleByIdService deleteArticleByIdService;
 
-    @PostMapping("/articles/delete/info/")
+    @PostMapping("/api/articles/delete/info/")
     public RespResult deleteArticleById(@RequestParam Map<String, String> data) {
+
         Integer body_id = Integer.valueOf(data.get("body_id"));
         return deleteArticleByIdService.deleteArticleById(body_id);
     }

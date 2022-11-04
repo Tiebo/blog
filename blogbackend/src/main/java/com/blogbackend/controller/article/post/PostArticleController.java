@@ -15,7 +15,7 @@ public class PostArticleController {
     @Autowired
     private PostArticleService postArticleService;
 
-    @PostMapping("/articles/post/info/")
+    @PostMapping("/api/articles/post/info/")
     public RespResult postArticle(@RequestParam Map<String, String> data) {
         return postArticleService.postArticle(data);
     }

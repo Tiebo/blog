@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const createAxios = axios.create({
-    baseURL: 'http://127.0.0.1:4000',
+    baseURL: 'http://127.0.0.1:3000/api',
     headers: {
         "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8"
     },
@@ -12,6 +12,7 @@ interface formObject {
     [key: string]: any;
 }
 // 辅助函数
+
 function objectToFormData(obj: formObject) {
     let formData = new FormData();
     for (let i in obj) {
@@ -27,8 +28,8 @@ function apiAxios(method: string, url: any, params: object) {
         return createAxios({
             method: method,
             url: url,
-            data: method === "POST"? data : null,
-            params: method === "GET"? data: null,
+            data: method === "POST" ? data : null,
+            params: method === "GET" ? data : null,
             headers: {
                 authorization: "Bearer " + data.get("token"),
             }
@@ -38,8 +39,8 @@ function apiAxios(method: string, url: any, params: object) {
         return createAxios({
             method: method,
             url: url,
-            data: method === "POST"? data : null,
-            params: method === "GET"? data: null,
+            data: method === "POST" ? data : null,
+            params: method === "GET" ? data : null,
         })
     }
 }
